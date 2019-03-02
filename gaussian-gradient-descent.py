@@ -70,8 +70,8 @@ def distance(real, est):
 population_means = [5]
 learning_rates = [0.05]
 starting_estimated_means = [30]
-s_intervals = [[2,5],[10,13]]
-steps = 10000
+s_intervals = [[0,3],[2,5],[2,8],[3.5,6.5],[5,8],[8,11]]
+steps = 3000
 # variance is fixed
 var = 1
 
