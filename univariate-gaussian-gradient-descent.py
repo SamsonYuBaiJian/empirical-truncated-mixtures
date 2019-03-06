@@ -16,6 +16,16 @@ def gradient_descent(steps, learning_rates, real_means, est_means, var, s_interv
                     step_values = []
                     dist_values = []
 
+                    if step % 1000 == 0:
+                        print('Number of steps: ' + str(step))
+                        print('Learning rate: ' + str(lr))
+                        print('Interval: ' + str(interval))
+                        print('Starting estimated mean: ' + str(est_initial))
+                        print('Current estimated mean: ' + str(est))
+                        print('Population mean: ' + str(real))
+                        print('Distance: ' + str(distance(real, est)))
+                        print('\n')
+
                     for step in range(steps):
                         step_values.append(step)
                         dist_values.append(distance(real, est))
@@ -23,16 +33,6 @@ def gradient_descent(steps, learning_rates, real_means, est_means, var, s_interv
                                 est, var, real), integrand_bottom(
                                 var, real)) - expectation([interval], integrand_top(
                                 est, var, est), integrand_bottom(var, est)))
-
-                        if step % 1000 == 0:
-                            print('Number of steps: ' + str(step))
-                            print('Learning rate: ' + str(lr))
-                            print('Interval: ' + str(interval))
-                            print('Starting estimated mean: ' + str(est_initial))
-                            print('Current estimated mean ' + str(est))
-                            print('Population mean: ' + str(real))
-                            print('Distance: ' + str(distance(real, est)))
-                            print('\n')
 
                     plt.plot(step_values, dist_values, label=str(interval))
 
@@ -58,9 +58,8 @@ def expectation(s_intervals, integrand_top, integrand_bottom):
         bottom += integrate.quad(integrand_bottom, interval[0], interval[1])[0]
     try:
         return top / bottom
-    except ZeroDivisionError:
-        return top / 1e-14
-
+    except:
+        return top / 1e-50
 
 def distance(real, est):
     return abs(real - est)
@@ -69,8 +68,8 @@ def distance(real, est):
 ## initialise parameters
 population_means = [5]
 learning_rates = [0.05]
-starting_estimated_means = [30]
-s_intervals = [[0,3],[2,5],[2,8],[3.5,6.5],[5,8],[8,11]]
+starting_estimated_means = [85]
+s_intervals = [[0,3]]
 steps = 3000
 # variance is fixed
 var = 1
