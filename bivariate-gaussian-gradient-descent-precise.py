@@ -1,7 +1,7 @@
 import numpy as np
 import math
-import scipy.integrate as integrate
 import matplotlib.pyplot as plt
+import mpmath as mp
 
 def gradient_descent(steps, learning_rates, real_means, est_means, s_intervals):
     plt.ylabel('Distance')
@@ -52,11 +52,11 @@ def gradient_descent(steps, learning_rates, real_means, est_means, s_intervals):
 
 
 def integrand_top_x1(est_mean, est_or_real_mean):
-    return lambda x1,x2: x1 * np.tanh(x1 * est_mean[0] + x2 * est_mean[1]) * (math.exp(-0.5 * ((x1 - est_or_real_mean[0])**2 + (x2 - est_or_real_mean[1])**2)) + \
+    return lambda x1,x2: x1 * math.tanh(x1 * est_mean[0] + x2 * est_mean[1]) * (math.exp(-0.5 * ((x1 - est_or_real_mean[0])**2 + (x2 - est_or_real_mean[1])**2)) + \
            math.exp(-0.5 * ((x1 + est_or_real_mean[0])**2 + (x2 + est_or_real_mean[1])**2)))
 
 def integrand_top_x2(est_mean, est_or_real_mean):
-    return lambda x1,x2: x2 * np.tanh(x1 * est_mean[0] + x2 * est_mean[1]) * (math.exp(-0.5 * ((x1 - est_or_real_mean[0])**2 + (x2 - est_or_real_mean[1])**2)) + \
+    return lambda x1,x2: x2 * math.tanh(x1 * est_mean[0] + x2 * est_mean[1]) * (math.exp(-0.5 * ((x1 - est_or_real_mean[0])**2 + (x2 - est_or_real_mean[1])**2)) + \
            math.exp(-0.5 * ((x1 + est_or_real_mean[0])**2 + (x2 + est_or_real_mean[1])**2)))
 
 
@@ -66,12 +66,12 @@ def integrand_bottom(est_or_real_mean):
 
 
 def expectation(intervals, integrand_top, integrand_bottom):
-    top = integrate.dblquad(integrand_top, intervals[0][0], intervals[0][1], lambda x2: intervals[1][0], lambda x2: intervals[1][1])[0]
-    bottom = integrate.dblquad(integrand_bottom, intervals[0][0], intervals[0][1], lambda x2: intervals[1][0], lambda x2: intervals[1][1])[0]
+    top = mp.quad(integrand_top, [intervals[0][0], intervals[0][1]], [intervals[1][0], intervals[1][1]])
+    bottom = mp.quad(integrand_bottom, [intervals[0][0], intervals[0][1]], [intervals[1][0], intervals[1][1]])
     try:
         return top / bottom
     except:
-        return top / 1e-50
+        print("Bottom is too small. Please try again.")
 
 
 def euclidean_distance(real, est_x1, est_x2):
@@ -81,8 +81,9 @@ def euclidean_distance(real, est_x1, est_x2):
 ## initialise parameters
 population_means_x1_x2 = [(5,5)]
 learning_rates = [0.05]
-starting_estimated_means_x1_x2 = [(75,75)]
+starting_estimated_means_x1_x2 = [(30,30)]
 s_intervals_x1_x2 = [[(12,20),(25,35)]]
 steps = 7000
+mp.dps = 5
 
 gradient_descent(steps, learning_rates, population_means_x1_x2, starting_estimated_means_x1_x2, s_intervals_x1_x2)
