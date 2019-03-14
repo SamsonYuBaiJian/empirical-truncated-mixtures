@@ -22,9 +22,9 @@ lib.bottom_est.restype = ctypes.c_double
 lib.bottom_est.argtypes = (ctypes.c_int, ctypes.POINTER(ctypes.c_double), ctypes.c_void_p)
 
 cpdef gradient_descent(int steps, double learning_rate, real_means, est_means, s_intervals):
-    plt.ylabel('Distance')
-    plt.xlabel('Number of steps')
-    plt.title('Distance vs. number of steps')
+    plt.ylabel('Log Distance')
+    plt.xlabel('Steps')
+    plt.title('Log Distance vs. Steps')
 
     for intervals in s_intervals:
         est_x1 = est_means[0]
@@ -37,14 +37,14 @@ cpdef gradient_descent(int steps, double learning_rate, real_means, est_means, s
             if step > 1:
                 distance = euclidean_distance(real_means, est_x1, est_x2)
                 if step % 1000 == 0:
-                    print('Number of steps: ' + str(step))
-                    print('Learning rate: ' + str(learning_rate))
-                    print('Intervals (x1,x2): ' + str(intervals))
-                    print('Starting estimated means (x1,x2): (' + str(est_means) + ')')
-                    print('Current estimated means (x1,x2): (' + str(est_x1) +', ' + str(est_x2) + ')')
-                    print('Population means (x1,x2): ' + str(real_means))
-                    print('Distance log: ' + str(log(distance)))
                     print('\n')
+                    print('Steps: ' + str(step))
+                    print('Learning Rate: ' + str(learning_rate))
+                    print('Intervals (x1, x2): ' + str(intervals))
+                    print('Starting Estimated Means (x1, x2): ' + str(est_means))
+                    print('Current Estimated Means (x1, x2): (' + str(est_x1) +', ' + str(est_x2) + ')')
+                    print('Population Means (x1, x2): ' + str(real_means))
+                    print('Log Distance: ' + str(log(distance)))
 
                 step_values.append(step)
                 # dist_values.append(distance)
@@ -67,9 +67,8 @@ cpdef gradient_descent(int steps, double learning_rate, real_means, est_means, s
                 est_x2 = temp_est_x2 + learning_rate * (expectation(intervals, integrand_top_x2_real, integrand_bottom_real, c) - expectation(intervals, integrand_top_x2_est,integrand_bottom_est, c))
 
 
-    plt.plot(step_values, dist_values_log, label="Distance log vs step")
-
-    plt.legend(loc='upper right')
+    plt.plot(step_values, dist_values_log)
+    # plt.legend(loc='upper right')
     plt.show()
 
 

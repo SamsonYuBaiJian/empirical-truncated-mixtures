@@ -86,10 +86,10 @@ def euclidean_distance(real, est_x1, est_x2):
 
 
 ## initialise parameters
-population_means_x1_x2 = [(5,5)]
+population_means_x1_x2 = [(4,4)]
 learning_rates = [0.01]
-starting_estimated_means_x1_x2 = [(40,40)]
-s_intervals_x1_x2 = [[(9,12),(10,15)]]
+starting_estimated_means_x1_x2 = [(11,11)]
+s_intervals_x1_x2 = [[(3,5),(5,8)]]
 steps = 10000
 
 start_time = time.clock()
