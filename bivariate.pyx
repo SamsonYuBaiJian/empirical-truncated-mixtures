@@ -115,5 +115,14 @@ def load(txt):
     print('Population Means (x1, x2): ' + f['real_means'])
     print('Log Distance: ' + str(f['dist_values_log_dict'][-1]))
     print('\nComments: ' + str(f['comments']))
+
     plt.plot(f['step_dict'], f['dist_values_log_dict'])
     plt.show()
+
+    change = input("\nDo you want to change your comments? (y/n)\n")
+    if change == 'y':
+        new = input("\nEnter your new comments.\n")
+        f['comments'] = new
+        n = open('./saved-parameters/' + str(txt), 'w')
+        n.write(str(f))
+        n.close()
