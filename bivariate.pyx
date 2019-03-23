@@ -35,7 +35,7 @@ cpdef gradient_descent(int steps, double learning_rate, real_means, est_means, s
         dist_values_log = []
 
         for step in range(steps + 1):
-            if step > 1:
+            if step >= 1:
                 distance = euclidean_distance(real_means, est_x1, est_x2)
                 if step % 1000 == 0:
                     print('\n')
@@ -74,7 +74,7 @@ cpdef gradient_descent(int steps, double learning_rate, real_means, est_means, s
 
     if save == 'y':
         comments = input('\nEnter your comments.\n')
-        f = open('./saved-parameters/' + str(step) + '-' + str(learning_rate) + '-' + str(real_means) + '-' + str(est_means) + '-' + str(s_intervals), 'w')
+        f = open('./saved-parameters/gradient-descent/' + str(step) + '-' + str(learning_rate) + '-' + str(real_means) + '-' + str(est_means) + '-' + str(s_intervals), 'w')
         save_dict = {}
         save_dict['step_dict'] = step_values
         save_dict['dist_values_log_dict'] = dist_values_log
@@ -105,7 +105,7 @@ def help():
     print("\nExample: gradient_descent(10000, 0.01, (4, 4), (10, 10), [[(3, 5), (5, 8)]])\n")
 
 def load(txt):
-    f = open('./saved-parameters/' + str(txt), 'r').readlines()
+    f = open('./saved-parameters/gradient-descent/' + str(txt), 'r').readlines()
     f = ast.literal_eval(f[0])
     print('\n')
     print('Steps: ' + f['steps'])
@@ -123,6 +123,6 @@ def load(txt):
     if change == 'y':
         new = input("\nEnter your new comments.\n")
         f['comments'] = new
-        n = open('./saved-parameters/' + str(txt), 'w')
+        n = open('./saved-parameters/gradient-descent/' + str(txt), 'w')
         n.write(str(f))
         n.close()
