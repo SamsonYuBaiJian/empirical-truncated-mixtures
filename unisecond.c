@@ -3232,7 +3232,7 @@ static PyObject *__pyx_pf_9unisecond_univariate_second_derivative(CYTHON_UNUSED 
  * 
  * def expectation(interval, integrand_top, integrand_bottom, est_or_real_mean):             # <<<<<<<<<<<<<<
  *     arg_tuple=(est_or_real_mean[0], est_or_real_mean[1])
- *     print(arg_tuple)
+ *     top = integrate.quad(integrand_top, interval[0], interval[1], args=arg_tuple)[0]
  */
 
 /* Python wrapper */
@@ -3338,8 +3338,8 @@ static PyObject *__pyx_pf_9unisecond_2expectation(CYTHON_UNUSED PyObject *__pyx_
  * 
  * def expectation(interval, integrand_top, integrand_bottom, est_or_real_mean):
  *     arg_tuple=(est_or_real_mean[0], est_or_real_mean[1])             # <<<<<<<<<<<<<<
- *     print(arg_tuple)
  *     top = integrate.quad(integrand_top, interval[0], interval[1], args=arg_tuple)[0]
+ *     bottom = integrate.quad(integrand_bottom, interval[0], interval[1], args=arg_tuple)[0]
  */
   __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_est_or_real_mean, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 104, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -3359,29 +3359,20 @@ static PyObject *__pyx_pf_9unisecond_2expectation(CYTHON_UNUSED PyObject *__pyx_
   /* "unisecond.pyx":105
  * def expectation(interval, integrand_top, integrand_bottom, est_or_real_mean):
  *     arg_tuple=(est_or_real_mean[0], est_or_real_mean[1])
- *     print(arg_tuple)             # <<<<<<<<<<<<<<
- *     top = integrate.quad(integrand_top, interval[0], interval[1], args=arg_tuple)[0]
- *     bottom = integrate.quad(integrand_bottom, interval[0], interval[1], args=arg_tuple)[0]
- */
-  if (__Pyx_PrintOne(0, __pyx_v_arg_tuple) < 0) __PYX_ERR(0, 105, __pyx_L1_error)
-
-  /* "unisecond.pyx":106
- *     arg_tuple=(est_or_real_mean[0], est_or_real_mean[1])
- *     print(arg_tuple)
  *     top = integrate.quad(integrand_top, interval[0], interval[1], args=arg_tuple)[0]             # <<<<<<<<<<<<<<
  *     bottom = integrate.quad(integrand_bottom, interval[0], interval[1], args=arg_tuple)[0]
  *     try:
  */
-  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_integrate); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 106, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_integrate); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_quad); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 106, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_quad); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_interval, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 106, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_interval, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_interval, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 106, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_interval, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = PyTuple_New(3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 106, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_INCREF(__pyx_v_integrand_top);
   __Pyx_GIVEREF(__pyx_v_integrand_top);
@@ -3392,37 +3383,37 @@ static PyObject *__pyx_pf_9unisecond_2expectation(CYTHON_UNUSED PyObject *__pyx_
   PyTuple_SET_ITEM(__pyx_t_4, 2, __pyx_t_1);
   __pyx_t_3 = 0;
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 106, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_args, __pyx_v_arg_tuple) < 0) __PYX_ERR(0, 106, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 106, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_args, __pyx_v_arg_tuple) < 0) __PYX_ERR(0, 105, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_t_3, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 106, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_t_3, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_top = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "unisecond.pyx":107
- *     print(arg_tuple)
+  /* "unisecond.pyx":106
+ *     arg_tuple=(est_or_real_mean[0], est_or_real_mean[1])
  *     top = integrate.quad(integrand_top, interval[0], interval[1], args=arg_tuple)[0]
  *     bottom = integrate.quad(integrand_bottom, interval[0], interval[1], args=arg_tuple)[0]             # <<<<<<<<<<<<<<
  *     try:
  *         return top / bottom
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_integrate); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_integrate); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 106, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_quad); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_quad); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 106, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_interval, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_interval, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 106, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = __Pyx_GetItemInt(__pyx_v_interval, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_GetItemInt(__pyx_v_interval, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 106, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_2 = PyTuple_New(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 106, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_v_integrand_bottom);
   __Pyx_GIVEREF(__pyx_v_integrand_bottom);
@@ -3433,21 +3424,21 @@ static PyObject *__pyx_pf_9unisecond_2expectation(CYTHON_UNUSED PyObject *__pyx_
   PyTuple_SET_ITEM(__pyx_t_2, 2, __pyx_t_4);
   __pyx_t_1 = 0;
   __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 106, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_args, __pyx_v_arg_tuple) < 0) __PYX_ERR(0, 107, __pyx_L1_error)
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_2, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 107, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_args, __pyx_v_arg_tuple) < 0) __PYX_ERR(0, 106, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_2, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 106, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_GetItemInt(__pyx_t_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_GetItemInt(__pyx_t_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 106, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_bottom = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "unisecond.pyx":108
+  /* "unisecond.pyx":107
  *     top = integrate.quad(integrand_top, interval[0], interval[1], args=arg_tuple)[0]
  *     bottom = integrate.quad(integrand_bottom, interval[0], interval[1], args=arg_tuple)[0]
  *     try:             # <<<<<<<<<<<<<<
@@ -3463,7 +3454,7 @@ static PyObject *__pyx_pf_9unisecond_2expectation(CYTHON_UNUSED PyObject *__pyx_
     __Pyx_XGOTREF(__pyx_t_7);
     /*try:*/ {
 
-      /* "unisecond.pyx":109
+      /* "unisecond.pyx":108
  *     bottom = integrate.quad(integrand_bottom, interval[0], interval[1], args=arg_tuple)[0]
  *     try:
  *         return top / bottom             # <<<<<<<<<<<<<<
@@ -3471,13 +3462,13 @@ static PyObject *__pyx_pf_9unisecond_2expectation(CYTHON_UNUSED PyObject *__pyx_
  *         print("Bottom is too small. Please try again.")
  */
       __Pyx_XDECREF(__pyx_r);
-      __pyx_t_4 = __Pyx_PyNumber_Divide(__pyx_v_top, __pyx_v_bottom); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 109, __pyx_L3_error)
+      __pyx_t_4 = __Pyx_PyNumber_Divide(__pyx_v_top, __pyx_v_bottom); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 108, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_4);
       __pyx_r = __pyx_t_4;
       __pyx_t_4 = 0;
       goto __pyx_L7_try_return;
 
-      /* "unisecond.pyx":108
+      /* "unisecond.pyx":107
  *     top = integrate.quad(integrand_top, interval[0], interval[1], args=arg_tuple)[0]
  *     bottom = integrate.quad(integrand_bottom, interval[0], interval[1], args=arg_tuple)[0]
  *     try:             # <<<<<<<<<<<<<<
@@ -3491,7 +3482,7 @@ static PyObject *__pyx_pf_9unisecond_2expectation(CYTHON_UNUSED PyObject *__pyx_
     __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "unisecond.pyx":110
+    /* "unisecond.pyx":109
  *     try:
  *         return top / bottom
  *     except:             # <<<<<<<<<<<<<<
@@ -3500,19 +3491,19 @@ static PyObject *__pyx_pf_9unisecond_2expectation(CYTHON_UNUSED PyObject *__pyx_
  */
     /*except:*/ {
       __Pyx_AddTraceback("unisecond.expectation", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_4, &__pyx_t_1, &__pyx_t_2) < 0) __PYX_ERR(0, 110, __pyx_L5_except_error)
+      if (__Pyx_GetException(&__pyx_t_4, &__pyx_t_1, &__pyx_t_2) < 0) __PYX_ERR(0, 109, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_GOTREF(__pyx_t_2);
 
-      /* "unisecond.pyx":111
+      /* "unisecond.pyx":110
  *         return top / bottom
  *     except:
  *         print("Bottom is too small. Please try again.")             # <<<<<<<<<<<<<<
  * 
  * def help():
  */
-      if (__Pyx_PrintOne(0, __pyx_kp_s_Bottom_is_too_small_Please_try_a) < 0) __PYX_ERR(0, 111, __pyx_L5_except_error)
+      if (__Pyx_PrintOne(0, __pyx_kp_s_Bottom_is_too_small_Please_try_a) < 0) __PYX_ERR(0, 110, __pyx_L5_except_error)
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -3520,7 +3511,7 @@ static PyObject *__pyx_pf_9unisecond_2expectation(CYTHON_UNUSED PyObject *__pyx_
     }
     __pyx_L5_except_error:;
 
-    /* "unisecond.pyx":108
+    /* "unisecond.pyx":107
  *     top = integrate.quad(integrand_top, interval[0], interval[1], args=arg_tuple)[0]
  *     bottom = integrate.quad(integrand_bottom, interval[0], interval[1], args=arg_tuple)[0]
  *     try:             # <<<<<<<<<<<<<<
@@ -3550,7 +3541,7 @@ static PyObject *__pyx_pf_9unisecond_2expectation(CYTHON_UNUSED PyObject *__pyx_
  * 
  * def expectation(interval, integrand_top, integrand_bottom, est_or_real_mean):             # <<<<<<<<<<<<<<
  *     arg_tuple=(est_or_real_mean[0], est_or_real_mean[1])
- *     print(arg_tuple)
+ *     top = integrate.quad(integrand_top, interval[0], interval[1], args=arg_tuple)[0]
  */
 
   /* function exit code */
@@ -3572,7 +3563,7 @@ static PyObject *__pyx_pf_9unisecond_2expectation(CYTHON_UNUSED PyObject *__pyx_
   return __pyx_r;
 }
 
-/* "unisecond.pyx":113
+/* "unisecond.pyx":112
  *         print("Bottom is too small. Please try again.")
  * 
  * def help():             # <<<<<<<<<<<<<<
@@ -3599,25 +3590,25 @@ static PyObject *__pyx_pf_9unisecond_4help(CYTHON_UNUSED PyObject *__pyx_self) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("help", 0);
 
-  /* "unisecond.pyx":114
+  /* "unisecond.pyx":113
  * 
  * def help():
  *     print("\nFormat: univariate_second_derivative(start, real_mean, [(x1_lower_bound,x1_upper_bound)])\n")             # <<<<<<<<<<<<<<
  *     print("\nExample: univariate_second_derivative(4, 2.5, [(3, 5)])\n")
  * 
  */
-  if (__Pyx_PrintOne(0, __pyx_kp_s_Format_univariate_second_deriva) < 0) __PYX_ERR(0, 114, __pyx_L1_error)
+  if (__Pyx_PrintOne(0, __pyx_kp_s_Format_univariate_second_deriva) < 0) __PYX_ERR(0, 113, __pyx_L1_error)
 
-  /* "unisecond.pyx":115
+  /* "unisecond.pyx":114
  * def help():
  *     print("\nFormat: univariate_second_derivative(start, real_mean, [(x1_lower_bound,x1_upper_bound)])\n")
  *     print("\nExample: univariate_second_derivative(4, 2.5, [(3, 5)])\n")             # <<<<<<<<<<<<<<
  * 
  * def load(txt):
  */
-  if (__Pyx_PrintOne(0, __pyx_kp_s_Example_univariate_second_deriv) < 0) __PYX_ERR(0, 115, __pyx_L1_error)
+  if (__Pyx_PrintOne(0, __pyx_kp_s_Example_univariate_second_deriv) < 0) __PYX_ERR(0, 114, __pyx_L1_error)
 
-  /* "unisecond.pyx":113
+  /* "unisecond.pyx":112
  *         print("Bottom is too small. Please try again.")
  * 
  * def help():             # <<<<<<<<<<<<<<
@@ -3637,7 +3628,7 @@ static PyObject *__pyx_pf_9unisecond_4help(CYTHON_UNUSED PyObject *__pyx_self) {
   return __pyx_r;
 }
 
-/* "unisecond.pyx":117
+/* "unisecond.pyx":116
  *     print("\nExample: univariate_second_derivative(4, 2.5, [(3, 5)])\n")
  * 
  * def load(txt):             # <<<<<<<<<<<<<<
@@ -3676,19 +3667,19 @@ static PyObject *__pyx_pf_9unisecond_6load(CYTHON_UNUSED PyObject *__pyx_self, P
   int __pyx_t_8;
   __Pyx_RefNannySetupContext("load", 0);
 
-  /* "unisecond.pyx":118
+  /* "unisecond.pyx":117
  * 
  * def load(txt):
  *     f = open('./saved-parameters/second-derivatives/' + str(txt), 'r').readlines()             # <<<<<<<<<<<<<<
  *     f = ast.literal_eval(f[0])
  *     print('\n')
  */
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_v_txt); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 118, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_v_txt); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 117, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyNumber_Add(__pyx_kp_s_saved_parameters_second_derivat, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 118, __pyx_L1_error)
+  __pyx_t_3 = PyNumber_Add(__pyx_kp_s_saved_parameters_second_derivat, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 117, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 118, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 117, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_3);
@@ -3696,10 +3687,10 @@ static PyObject *__pyx_pf_9unisecond_6load(CYTHON_UNUSED PyObject *__pyx_self, P
   __Pyx_GIVEREF(__pyx_n_s_r);
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_n_s_r);
   __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_open, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 118, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_open, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 117, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_readlines); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 118, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_readlines); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 117, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = NULL;
@@ -3713,29 +3704,29 @@ static PyObject *__pyx_pf_9unisecond_6load(CYTHON_UNUSED PyObject *__pyx_self, P
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 118, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 117, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 118, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 117, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_f = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "unisecond.pyx":119
+  /* "unisecond.pyx":118
  * def load(txt):
  *     f = open('./saved-parameters/second-derivatives/' + str(txt), 'r').readlines()
  *     f = ast.literal_eval(f[0])             # <<<<<<<<<<<<<<
  *     print('\n')
  *     print('Start: ' + f['start'])
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_ast); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 119, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_ast); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 118, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_literal_eval); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 119, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_literal_eval); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 118, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_f, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 119, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_f, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 118, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_4 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -3748,14 +3739,14 @@ static PyObject *__pyx_pf_9unisecond_6load(CYTHON_UNUSED PyObject *__pyx_self, P
     }
   }
   if (!__pyx_t_4) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 119, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 118, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else {
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_3)) {
       PyObject *__pyx_temp[2] = {__pyx_t_4, __pyx_t_2};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 119, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 118, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -3764,20 +3755,20 @@ static PyObject *__pyx_pf_9unisecond_6load(CYTHON_UNUSED PyObject *__pyx_self, P
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
       PyObject *__pyx_temp[2] = {__pyx_t_4, __pyx_t_2};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 119, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 118, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     } else
     #endif
     {
-      __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 119, __pyx_L1_error)
+      __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 118, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_4); __pyx_t_4 = NULL;
       __Pyx_GIVEREF(__pyx_t_2);
       PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_t_2);
       __pyx_t_2 = 0;
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 119, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 118, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     }
@@ -3786,93 +3777,93 @@ static PyObject *__pyx_pf_9unisecond_6load(CYTHON_UNUSED PyObject *__pyx_self, P
   __Pyx_DECREF_SET(__pyx_v_f, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "unisecond.pyx":120
+  /* "unisecond.pyx":119
  *     f = open('./saved-parameters/second-derivatives/' + str(txt), 'r').readlines()
  *     f = ast.literal_eval(f[0])
  *     print('\n')             # <<<<<<<<<<<<<<
  *     print('Start: ' + f['start'])
  *     print('Intervals: ' + f['s_intervals'])
  */
-  if (__Pyx_PrintOne(0, __pyx_kp_s__4) < 0) __PYX_ERR(0, 120, __pyx_L1_error)
+  if (__Pyx_PrintOne(0, __pyx_kp_s__4) < 0) __PYX_ERR(0, 119, __pyx_L1_error)
 
-  /* "unisecond.pyx":121
+  /* "unisecond.pyx":120
  *     f = ast.literal_eval(f[0])
  *     print('\n')
  *     print('Start: ' + f['start'])             # <<<<<<<<<<<<<<
  *     print('Intervals: ' + f['s_intervals'])
  *     print('Population Mean: ' + f['real_means'])
  */
-  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_f, __pyx_n_s_start); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 121, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_f, __pyx_n_s_start); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 120, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyNumber_Add(__pyx_kp_s_Start, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 121, __pyx_L1_error)
+  __pyx_t_3 = PyNumber_Add(__pyx_kp_s_Start, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 120, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (__Pyx_PrintOne(0, __pyx_t_3) < 0) __PYX_ERR(0, 121, __pyx_L1_error)
+  if (__Pyx_PrintOne(0, __pyx_t_3) < 0) __PYX_ERR(0, 120, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "unisecond.pyx":122
+  /* "unisecond.pyx":121
  *     print('\n')
  *     print('Start: ' + f['start'])
  *     print('Intervals: ' + f['s_intervals'])             # <<<<<<<<<<<<<<
  *     print('Population Mean: ' + f['real_means'])
  *     print('\nComments: ' + str(f['comments']))
  */
-  __pyx_t_3 = __Pyx_PyObject_Dict_GetItem(__pyx_v_f, __pyx_n_s_s_intervals); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 122, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Dict_GetItem(__pyx_v_f, __pyx_n_s_s_intervals); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 121, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = PyNumber_Add(__pyx_kp_s_Intervals, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 122, __pyx_L1_error)
+  __pyx_t_1 = PyNumber_Add(__pyx_kp_s_Intervals, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 121, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (__Pyx_PrintOne(0, __pyx_t_1) < 0) __PYX_ERR(0, 122, __pyx_L1_error)
+  if (__Pyx_PrintOne(0, __pyx_t_1) < 0) __PYX_ERR(0, 121, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "unisecond.pyx":123
+  /* "unisecond.pyx":122
  *     print('Start: ' + f['start'])
  *     print('Intervals: ' + f['s_intervals'])
  *     print('Population Mean: ' + f['real_means'])             # <<<<<<<<<<<<<<
  *     print('\nComments: ' + str(f['comments']))
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_f, __pyx_n_s_real_means); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 123, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_f, __pyx_n_s_real_means); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 122, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyNumber_Add(__pyx_kp_s_Population_Mean, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 123, __pyx_L1_error)
+  __pyx_t_3 = PyNumber_Add(__pyx_kp_s_Population_Mean, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 122, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (__Pyx_PrintOne(0, __pyx_t_3) < 0) __PYX_ERR(0, 123, __pyx_L1_error)
+  if (__Pyx_PrintOne(0, __pyx_t_3) < 0) __PYX_ERR(0, 122, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "unisecond.pyx":124
+  /* "unisecond.pyx":123
  *     print('Intervals: ' + f['s_intervals'])
  *     print('Population Mean: ' + f['real_means'])
  *     print('\nComments: ' + str(f['comments']))             # <<<<<<<<<<<<<<
  * 
  *     plt.plot(f['estimated_means_dict'],f['second_derivatives_dict'])
  */
-  __pyx_t_3 = __Pyx_PyObject_Dict_GetItem(__pyx_v_f, __pyx_n_s_comments); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 124, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Dict_GetItem(__pyx_v_f, __pyx_n_s_comments); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 123, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 124, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 123, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyNumber_Add(__pyx_kp_s_Comments, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 124, __pyx_L1_error)
+  __pyx_t_3 = PyNumber_Add(__pyx_kp_s_Comments, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 123, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (__Pyx_PrintOne(0, __pyx_t_3) < 0) __PYX_ERR(0, 124, __pyx_L1_error)
+  if (__Pyx_PrintOne(0, __pyx_t_3) < 0) __PYX_ERR(0, 123, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "unisecond.pyx":126
+  /* "unisecond.pyx":125
  *     print('\nComments: ' + str(f['comments']))
  * 
  *     plt.plot(f['estimated_means_dict'],f['second_derivatives_dict'])             # <<<<<<<<<<<<<<
  *     plt.show()
  * 
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_plt); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 126, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_plt); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 125, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_plot); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 126, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_plot); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 125, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_f, __pyx_n_s_estimated_means_dict); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 126, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_f, __pyx_n_s_estimated_means_dict); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 125, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_f, __pyx_n_s_second_derivatives_dict); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 126, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_f, __pyx_n_s_second_derivatives_dict); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 125, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_4 = NULL;
   __pyx_t_6 = 0;
@@ -3889,7 +3880,7 @@ static PyObject *__pyx_pf_9unisecond_6load(CYTHON_UNUSED PyObject *__pyx_self, P
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_5)) {
     PyObject *__pyx_temp[3] = {__pyx_t_4, __pyx_t_1, __pyx_t_2};
-    __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 126, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 125, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -3899,7 +3890,7 @@ static PyObject *__pyx_pf_9unisecond_6load(CYTHON_UNUSED PyObject *__pyx_self, P
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_5)) {
     PyObject *__pyx_temp[3] = {__pyx_t_4, __pyx_t_1, __pyx_t_2};
-    __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 126, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 125, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -3907,7 +3898,7 @@ static PyObject *__pyx_pf_9unisecond_6load(CYTHON_UNUSED PyObject *__pyx_self, P
   } else
   #endif
   {
-    __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 126, __pyx_L1_error)
+    __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 125, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     if (__pyx_t_4) {
       __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_4); __pyx_t_4 = NULL;
@@ -3918,23 +3909,23 @@ static PyObject *__pyx_pf_9unisecond_6load(CYTHON_UNUSED PyObject *__pyx_self, P
     PyTuple_SET_ITEM(__pyx_t_7, 1+__pyx_t_6, __pyx_t_2);
     __pyx_t_1 = 0;
     __pyx_t_2 = 0;
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_7, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 126, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_7, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 125, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   }
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "unisecond.pyx":127
+  /* "unisecond.pyx":126
  * 
  *     plt.plot(f['estimated_means_dict'],f['second_derivatives_dict'])
  *     plt.show()             # <<<<<<<<<<<<<<
  * 
  *     change = input("\nDo you want to change your comments? (y/n)\n")
  */
-  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_plt); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 127, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_plt); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 126, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_show); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 127, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_show); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 126, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_t_5 = NULL;
@@ -3948,71 +3939,71 @@ static PyObject *__pyx_pf_9unisecond_6load(CYTHON_UNUSED PyObject *__pyx_self, P
     }
   }
   if (__pyx_t_5) {
-    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 127, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   } else {
-    __pyx_t_3 = __Pyx_PyObject_CallNoArg(__pyx_t_7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 127, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_CallNoArg(__pyx_t_7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 126, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "unisecond.pyx":129
+  /* "unisecond.pyx":128
  *     plt.show()
  * 
  *     change = input("\nDo you want to change your comments? (y/n)\n")             # <<<<<<<<<<<<<<
  *     if change == 'y':
  *         new = input("\nEnter your new comments.\n")
  */
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_input, __pyx_tuple__8, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 129, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_input, __pyx_tuple__8, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 128, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_v_change = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "unisecond.pyx":130
+  /* "unisecond.pyx":129
  * 
  *     change = input("\nDo you want to change your comments? (y/n)\n")
  *     if change == 'y':             # <<<<<<<<<<<<<<
  *         new = input("\nEnter your new comments.\n")
  *         f['comments'] = new
  */
-  __pyx_t_8 = (__Pyx_PyString_Equals(__pyx_v_change, __pyx_n_s_y, Py_EQ)); if (unlikely(__pyx_t_8 < 0)) __PYX_ERR(0, 130, __pyx_L1_error)
+  __pyx_t_8 = (__Pyx_PyString_Equals(__pyx_v_change, __pyx_n_s_y, Py_EQ)); if (unlikely(__pyx_t_8 < 0)) __PYX_ERR(0, 129, __pyx_L1_error)
   if (__pyx_t_8) {
 
-    /* "unisecond.pyx":131
+    /* "unisecond.pyx":130
  *     change = input("\nDo you want to change your comments? (y/n)\n")
  *     if change == 'y':
  *         new = input("\nEnter your new comments.\n")             # <<<<<<<<<<<<<<
  *         f['comments'] = new
  *         n = open('./saved-parameters/second-derivatives/' + str(txt), 'w')
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_input, __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 131, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_input, __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 130, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_v_new = __pyx_t_3;
     __pyx_t_3 = 0;
 
-    /* "unisecond.pyx":132
+    /* "unisecond.pyx":131
  *     if change == 'y':
  *         new = input("\nEnter your new comments.\n")
  *         f['comments'] = new             # <<<<<<<<<<<<<<
  *         n = open('./saved-parameters/second-derivatives/' + str(txt), 'w')
  *         n.write(str(f))
  */
-    if (unlikely(PyObject_SetItem(__pyx_v_f, __pyx_n_s_comments, __pyx_v_new) < 0)) __PYX_ERR(0, 132, __pyx_L1_error)
+    if (unlikely(PyObject_SetItem(__pyx_v_f, __pyx_n_s_comments, __pyx_v_new) < 0)) __PYX_ERR(0, 131, __pyx_L1_error)
 
-    /* "unisecond.pyx":133
+    /* "unisecond.pyx":132
  *         new = input("\nEnter your new comments.\n")
  *         f['comments'] = new
  *         n = open('./saved-parameters/second-derivatives/' + str(txt), 'w')             # <<<<<<<<<<<<<<
  *         n.write(str(f))
  *         n.close()
  */
-    __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_v_txt); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 133, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_v_txt); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 132, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_7 = PyNumber_Add(__pyx_kp_s_saved_parameters_second_derivat, __pyx_t_3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 133, __pyx_L1_error)
+    __pyx_t_7 = PyNumber_Add(__pyx_kp_s_saved_parameters_second_derivat, __pyx_t_3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 132, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 133, __pyx_L1_error)
+    __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 132, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_GIVEREF(__pyx_t_7);
     PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_7);
@@ -4020,21 +4011,21 @@ static PyObject *__pyx_pf_9unisecond_6load(CYTHON_UNUSED PyObject *__pyx_self, P
     __Pyx_GIVEREF(__pyx_n_s_w);
     PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_n_s_w);
     __pyx_t_7 = 0;
-    __pyx_t_7 = __Pyx_PyObject_Call(__pyx_builtin_open, __pyx_t_3, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 133, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_Call(__pyx_builtin_open, __pyx_t_3, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 132, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_v_n = __pyx_t_7;
     __pyx_t_7 = 0;
 
-    /* "unisecond.pyx":134
+    /* "unisecond.pyx":133
  *         f['comments'] = new
  *         n = open('./saved-parameters/second-derivatives/' + str(txt), 'w')
  *         n.write(str(f))             # <<<<<<<<<<<<<<
  *         n.close()
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_n, __pyx_n_s_write); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 134, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_n, __pyx_n_s_write); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 133, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_5 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_v_f); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 134, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_v_f); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 133, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __pyx_t_2 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
@@ -4047,14 +4038,14 @@ static PyObject *__pyx_pf_9unisecond_6load(CYTHON_UNUSED PyObject *__pyx_self, P
       }
     }
     if (!__pyx_t_2) {
-      __pyx_t_7 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_5); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 134, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_5); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 133, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_GOTREF(__pyx_t_7);
     } else {
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_3)) {
         PyObject *__pyx_temp[2] = {__pyx_t_2, __pyx_t_5};
-        __pyx_t_7 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 134, __pyx_L1_error)
+        __pyx_t_7 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 133, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
         __Pyx_GOTREF(__pyx_t_7);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -4063,20 +4054,20 @@ static PyObject *__pyx_pf_9unisecond_6load(CYTHON_UNUSED PyObject *__pyx_self, P
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
         PyObject *__pyx_temp[2] = {__pyx_t_2, __pyx_t_5};
-        __pyx_t_7 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 134, __pyx_L1_error)
+        __pyx_t_7 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 133, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
         __Pyx_GOTREF(__pyx_t_7);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       } else
       #endif
       {
-        __pyx_t_1 = PyTuple_New(1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 134, __pyx_L1_error)
+        __pyx_t_1 = PyTuple_New(1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 133, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2); __pyx_t_2 = NULL;
         __Pyx_GIVEREF(__pyx_t_5);
         PyTuple_SET_ITEM(__pyx_t_1, 0+1, __pyx_t_5);
         __pyx_t_5 = 0;
-        __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 134, __pyx_L1_error)
+        __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 133, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_7);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       }
@@ -4084,12 +4075,12 @@ static PyObject *__pyx_pf_9unisecond_6load(CYTHON_UNUSED PyObject *__pyx_self, P
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-    /* "unisecond.pyx":135
+    /* "unisecond.pyx":134
  *         n = open('./saved-parameters/second-derivatives/' + str(txt), 'w')
  *         n.write(str(f))
  *         n.close()             # <<<<<<<<<<<<<<
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_n, __pyx_n_s_close); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 135, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_n, __pyx_n_s_close); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 134, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_1 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
@@ -4102,16 +4093,16 @@ static PyObject *__pyx_pf_9unisecond_6load(CYTHON_UNUSED PyObject *__pyx_self, P
       }
     }
     if (__pyx_t_1) {
-      __pyx_t_7 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 135, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 134, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     } else {
-      __pyx_t_7 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 135, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 134, __pyx_L1_error)
     }
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-    /* "unisecond.pyx":130
+    /* "unisecond.pyx":129
  * 
  *     change = input("\nDo you want to change your comments? (y/n)\n")
  *     if change == 'y':             # <<<<<<<<<<<<<<
@@ -4120,7 +4111,7 @@ static PyObject *__pyx_pf_9unisecond_6load(CYTHON_UNUSED PyObject *__pyx_self, P
  */
   }
 
-  /* "unisecond.pyx":117
+  /* "unisecond.pyx":116
  *     print("\nExample: univariate_second_derivative(4, 2.5, [(3, 5)])\n")
  * 
  * def load(txt):             # <<<<<<<<<<<<<<
@@ -4356,25 +4347,25 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
 
-  /* "unisecond.pyx":129
+  /* "unisecond.pyx":128
  *     plt.show()
  * 
  *     change = input("\nDo you want to change your comments? (y/n)\n")             # <<<<<<<<<<<<<<
  *     if change == 'y':
  *         new = input("\nEnter your new comments.\n")
  */
-  __pyx_tuple__8 = PyTuple_Pack(1, __pyx_kp_s_Do_you_want_to_change_your_comm); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 129, __pyx_L1_error)
+  __pyx_tuple__8 = PyTuple_Pack(1, __pyx_kp_s_Do_you_want_to_change_your_comm); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 128, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__8);
   __Pyx_GIVEREF(__pyx_tuple__8);
 
-  /* "unisecond.pyx":131
+  /* "unisecond.pyx":130
  *     change = input("\nDo you want to change your comments? (y/n)\n")
  *     if change == 'y':
  *         new = input("\nEnter your new comments.\n")             # <<<<<<<<<<<<<<
  *         f['comments'] = new
  *         n = open('./saved-parameters/second-derivatives/' + str(txt), 'w')
  */
-  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_kp_s_Enter_your_new_comments); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 131, __pyx_L1_error)
+  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_kp_s_Enter_your_new_comments); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 130, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__9);
   __Pyx_GIVEREF(__pyx_tuple__9);
 
@@ -4394,33 +4385,33 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  * def expectation(interval, integrand_top, integrand_bottom, est_or_real_mean):             # <<<<<<<<<<<<<<
  *     arg_tuple=(est_or_real_mean[0], est_or_real_mean[1])
- *     print(arg_tuple)
+ *     top = integrate.quad(integrand_top, interval[0], interval[1], args=arg_tuple)[0]
  */
   __pyx_tuple__12 = PyTuple_Pack(7, __pyx_n_s_interval, __pyx_n_s_integrand_top, __pyx_n_s_integrand_bottom, __pyx_n_s_est_or_real_mean, __pyx_n_s_arg_tuple, __pyx_n_s_top, __pyx_n_s_bottom); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(0, 103, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__12);
   __Pyx_GIVEREF(__pyx_tuple__12);
   __pyx_codeobj__13 = (PyObject*)__Pyx_PyCode_New(4, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__12, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_unisecond_pyx, __pyx_n_s_expectation, 103, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__13)) __PYX_ERR(0, 103, __pyx_L1_error)
 
-  /* "unisecond.pyx":113
+  /* "unisecond.pyx":112
  *         print("Bottom is too small. Please try again.")
  * 
  * def help():             # <<<<<<<<<<<<<<
  *     print("\nFormat: univariate_second_derivative(start, real_mean, [(x1_lower_bound,x1_upper_bound)])\n")
  *     print("\nExample: univariate_second_derivative(4, 2.5, [(3, 5)])\n")
  */
-  __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(0, 0, 0, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_unisecond_pyx, __pyx_n_s_help, 113, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) __PYX_ERR(0, 113, __pyx_L1_error)
+  __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(0, 0, 0, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_unisecond_pyx, __pyx_n_s_help, 112, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) __PYX_ERR(0, 112, __pyx_L1_error)
 
-  /* "unisecond.pyx":117
+  /* "unisecond.pyx":116
  *     print("\nExample: univariate_second_derivative(4, 2.5, [(3, 5)])\n")
  * 
  * def load(txt):             # <<<<<<<<<<<<<<
  *     f = open('./saved-parameters/second-derivatives/' + str(txt), 'r').readlines()
  *     f = ast.literal_eval(f[0])
  */
-  __pyx_tuple__15 = PyTuple_Pack(5, __pyx_n_s_txt, __pyx_n_s_f, __pyx_n_s_change, __pyx_n_s_new, __pyx_n_s_n); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(0, 117, __pyx_L1_error)
+  __pyx_tuple__15 = PyTuple_Pack(5, __pyx_n_s_txt, __pyx_n_s_f, __pyx_n_s_change, __pyx_n_s_new, __pyx_n_s_n); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__15);
   __Pyx_GIVEREF(__pyx_tuple__15);
-  __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(1, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_unisecond_pyx, __pyx_n_s_load, 117, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) __PYX_ERR(0, 117, __pyx_L1_error)
+  __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(1, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_unisecond_pyx, __pyx_n_s_load, 116, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -5170,35 +5161,35 @@ if (!__Pyx_RefNanny) {
  * 
  * def expectation(interval, integrand_top, integrand_bottom, est_or_real_mean):             # <<<<<<<<<<<<<<
  *     arg_tuple=(est_or_real_mean[0], est_or_real_mean[1])
- *     print(arg_tuple)
+ *     top = integrate.quad(integrand_top, interval[0], interval[1], args=arg_tuple)[0]
  */
   __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_9unisecond_3expectation, NULL, __pyx_n_s_unisecond); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 103, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_expectation, __pyx_t_2) < 0) __PYX_ERR(0, 103, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "unisecond.pyx":113
+  /* "unisecond.pyx":112
  *         print("Bottom is too small. Please try again.")
  * 
  * def help():             # <<<<<<<<<<<<<<
  *     print("\nFormat: univariate_second_derivative(start, real_mean, [(x1_lower_bound,x1_upper_bound)])\n")
  *     print("\nExample: univariate_second_derivative(4, 2.5, [(3, 5)])\n")
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_9unisecond_5help, NULL, __pyx_n_s_unisecond); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 113, __pyx_L1_error)
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_9unisecond_5help, NULL, __pyx_n_s_unisecond); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 112, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_help, __pyx_t_2) < 0) __PYX_ERR(0, 113, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_help, __pyx_t_2) < 0) __PYX_ERR(0, 112, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "unisecond.pyx":117
+  /* "unisecond.pyx":116
  *     print("\nExample: univariate_second_derivative(4, 2.5, [(3, 5)])\n")
  * 
  * def load(txt):             # <<<<<<<<<<<<<<
  *     f = open('./saved-parameters/second-derivatives/' + str(txt), 'r').readlines()
  *     f = ast.literal_eval(f[0])
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_9unisecond_7load, NULL, __pyx_n_s_unisecond); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 117, __pyx_L1_error)
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_9unisecond_7load, NULL, __pyx_n_s_unisecond); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_load, __pyx_t_2) < 0) __PYX_ERR(0, 117, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_load, __pyx_t_2) < 0) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "unisecond.pyx":1
