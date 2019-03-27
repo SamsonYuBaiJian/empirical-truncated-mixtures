@@ -1,7 +1,7 @@
 # Research for NIPS
 Algorithms from Gaussian distribution research with Dr. Ioannis Panageas from the Singapore University of Technology and Design.
 
-## Steps:
+## Steps
 1. Use the Cython version for code that is 3X faster than the Python implementation.
 2. Make sure you have the dependencies.
 3. To compile, enter 'python3 setup.py build_ext --inplace' in the root directory.
