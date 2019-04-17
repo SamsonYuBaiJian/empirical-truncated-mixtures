@@ -23,7 +23,6 @@ def get_real_mean(steps, sample_mean, est_mean, s):
     plt.xlabel('Number of steps')
     plt.title('Estimated real mean vs. number of steps')
 
-    starting_sample_mean = sample_mean
     starting_est_real_mean = est_mean
 
     mean_values = []
@@ -31,19 +30,19 @@ def get_real_mean(steps, sample_mean, est_mean, s):
 
     for step in range(steps):
         step_values.append(step + 1)
-        mean_values.append(sample_mean)
+        mean_values.append(est_mean)
 
-        sample_mean = sample_mean + (1/math.sqrt(step + 1)) * (sample_function_truncation(sample_mean,est_mean,s)-sample_function_truncation(est_mean,est_mean,s))
+        est_mean = est_mean + (1/math.sqrt(step + 1)) * (sample_function_truncation(sample_mean,est_mean,s)-sample_function_truncation(est_mean,est_mean,s))
 
         if (step + 1) % 1000 == 0:
             print('Number of steps: ' + str(step + 1))
-            print('Starting sample mean: ' + str(starting_sample_mean))
+            print('Starting sample mean: ' + str(sample_mean))
             print('Starting estimated real mean: ' + str(starting_est_real_mean))
             if s > 0:
                 print('Interval: (' + str(s) + ', ' + str(-s) + ')')
             elif s < 0:
                 print('Interval: (' + str(-s) + ', ' + str(s) + ')')
-            print('Current estimated real mean: ' + str(sample_mean))
+            print('Current estimated real mean: ' + str(est_mean))
             print('\n')
 
     plt.plot(step_values, mean_values)
