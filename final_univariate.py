@@ -39,9 +39,9 @@ def get_real_mean(steps, sample_mean, est_mean, s):
             print('Starting sample mean: ' + str(sample_mean))
             print('Starting estimated real mean: ' + str(starting_est_real_mean))
             if s > 0:
-                print('Interval: (' + str(s) + ', ' + str(-s) + ')')
-            elif s < 0:
                 print('Interval: (' + str(-s) + ', ' + str(s) + ')')
+            elif s < 0:
+                print('Interval: (' + str(s) + ', ' + str(-s) + ')')
             print('Current estimated real mean: ' + str(est_mean))
             print('\n')
 
