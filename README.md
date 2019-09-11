@@ -1,4 +1,4 @@
-# Research for NIPS
+# Mathematics and Machine Learning Research
 Algorithms from Gaussian distribution research with Dr. Ioannis Panageas from the Singapore University of Technology and Design.
 
 ## Steps
