@@ -85,9 +85,9 @@ cpdef run(int steps, double learning_rate, real_means, est_means, s_intervals, f
             os.makedirs('./experiments/' + str(learning_rate) + '-' + str(real_means) + '-' + str(fixed_error))
         f = open('./experiments/' + str(learning_rate) + '-' + str(real_means) + '-' + str(fixed_error) + '/' + str(est_means) + '-' + str(s_intervals) +  '-' + str(denominator) + '-' + str(fixed_error_step), 'w')
         save_dict = {}
-        save_dict['step_dict'] = step_values
-        save_dict['errors'] = error_values
-        save_dict['steps'] = str(step)
+        save_dict['step_values'] = step_values
+        save_dict['error_values'] = error_values
+        save_dict['steps'] = str(steps)
         save_dict['learning_rate'] = str(learning_rate)
         save_dict['real_means'] = str(real_means)
         save_dict['est_means'] = str(est_means)
@@ -125,16 +125,15 @@ def view(data_file_path):
     print('\n')
     print('Steps: ' + f['steps'])
     print('Learning Rate: ' + f['learning_rate'])
+    print('Real means (x1,x2): ' + f['real_means'])
+    print('Starting estimated means (x1, x2): ' + f['est_means'])
     print('Intervals (x1,x2): ' + f['s_intervals'])
     print('Denominator: ' + f['denominator'])
-    print('Starting estimated means (x1, x2): ' + f['est_means'])
-    print('Real means (x1,x2): ' + f['real_means'])
-    print('Final error: ' + str(f['errors'][-1]))
 
     plt.ylabel('Error')
     plt.xlabel('Iteration')
     plt.title('Error vs. Iteration')
-    plt.plot(f['step_dict'], f['errors'])
+    plt.plot(f['step_values'], f['error_values'])
     plt.show()
 
 

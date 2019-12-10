@@ -19,7 +19,7 @@ lib.bottom_real.argtypes = (ctypes.c_int, ctypes.POINTER(ctypes.c_double), ctype
 lib.bottom_est.restype = ctypes.c_double
 lib.bottom_est.argtypes = (ctypes.c_int, ctypes.POINTER(ctypes.c_double), ctypes.c_void_p)
 
-cpdef run(double start, real_mean, s_interval):
+cpdef run(int steps, double learning_rate, double est_mean, real_mean, s_interval, fixed_error):
     plt.ylabel('Error')
     plt.xlabel('Iteration')
     plt.title('Error vs. Iteration')
@@ -27,18 +27,18 @@ cpdef run(double start, real_mean, s_interval):
     error_values = []
     estimated_mean = []
 
-    current = start
-    end = -start
-    difference = abs(start) * 2
+    current = est_mean
+    end = -est_mean
+    difference = abs(est_mean) * 2
 
-    if start < end:
+    if est_mean < end:
         change = 0.01
     else:
         change = -0.01
 
-    steps = abs(difference/change)
+    # steps = abs(difference/change)
 
-    initial_diff = int(abs(current - start))
+    initial_diff = int(abs(current - est_mean))
     initial_count = 0
     cur_diff = initial_diff
 
@@ -58,11 +58,11 @@ cpdef run(double start, real_mean, s_interval):
         derivative = expectation(s_interval, integrand_top_1, integrand_bottom_real, c) - expectation(s_interval, integrand_top_2, integrand_bottom_est, c) + pow(expectation(s_interval, integrand_top_3, integrand_bottom_est, c),2);
         error_values.append(derivative)
 
-        check_cur_diff = int(abs(current - start))
+        check_cur_diff = int(abs(current - est_mean))
 
         if check_cur_diff == initial_diff and initial_count == 0:
             print('\n')
-            print('Starting Estimated Mean: ' + str(start))
+            print('Starting Estimated Mean: ' + str(est_mean))
             print('Estimated Mean: ' + str(current))
             print('Second Derivative: ' + str(derivative))
             print('Interval: ' + str(s_interval))
@@ -71,7 +71,7 @@ cpdef run(double start, real_mean, s_interval):
 
         if check_cur_diff != cur_diff:
             print('\n')
-            print('Starting Estimated Mean: ' + str(start))
+            print('Starting Estimated Mean: ' + str(est_mean))
             print('Estimated Mean: ' + str(current))
             print('Second Derivative: ' + str(derivative))
             print('Interval: ' + str(s_interval))
@@ -83,15 +83,21 @@ cpdef run(double start, real_mean, s_interval):
     plt.plot(estimated_means,second_derivatives)
     plt.show()
 
-    f = open('./saved-parameters/second-derivatives/' + str(start) + '-' + str(real_mean) + '-' + str(s_interval), 'w')
-    save_dict = {}
-    save_dict['second_derivatives_dict'] = second_derivatives
-    save_dict['estimated_means_dict'] = estimated_means
-    save_dict['start'] = str(start)
-    save_dict['real_mean'] = str(real_mean)
-    save_dict['s_interval'] = str(s_interval)
-    f.write(str(save_dict))
-    f.close()
+    if fixed_error_step is not None:
+        # save values for iteration vs. denominator graph
+        if not os.path.exists('./experiments/' + str(learning_rate) + '-' + str(real_mean) + '-' + str(fixed_error)):
+            os.makedirs('./experiments/' + str(learning_rate) + '-' + str(real_mean) + '-' + str(fixed_error))
+        f = open('./experiments/' + str(learning_rate) + '-' + str(real_mean) + '-' + str(fixed_error) + '/' + str(est_mean) + '-' + str(s_intervals) +  '-' + str(denominator) + '-' + str(fixed_error_step), 'w')
+        save_dict = {}
+        save_dict['second_derivatives_dict'] = second_derivatives
+        save_dict['estimated_means_dict'] = estimated_means
+        save_dict['steps'] = str(steps)
+        save_dict['learning_rate'] = str(learning_rate)
+        save_dict['real_mean'] = str(real_mean)
+        save_dict['est_mean'] = str(est_mean)
+        save_dict['s_interval'] = str(s_interval)
+        f.write(str(save_dict))
+        f.close()
 
 def expectation(interval, integrand_top, integrand_bottom, est_or_real_mean):
     arg_tuple=(est_or_real_mean[0], est_or_real_mean[1])
@@ -103,16 +109,22 @@ def expectation(interval, integrand_top, integrand_bottom, est_or_real_mean):
         print("Bottom is too small. Please try again.")
 
 def help():
-    print("\nFormat: univariate_second_derivative(start, real_mean, [(x1_lower_bound,x1_upper_bound)])\n")
-    print("\nExample: univariate_second_derivative(4, 2.5, [(3, 5)])\n")
+    print("\nFormat: univariate.run(steps, learning_rate, real_mean, est_mean, (x_lower_bound,x_upper_bound), fixed_error_checkpoint)\n")
+    print("\nExample: univariate.run(10000, 0.01, 4, 10, (3, 5), 0.1)\n")
 
-def load(txt):
-    f = open('./saved-parameters/second-derivatives/' + str(txt), 'r').readlines()
+def view(data_file_path):
+    f = open(str(data_file_path), 'r').readlines()
     f = ast.literal_eval(f[0])
     print('\n')
-    print('Start: ' + f['start'])
-    print('Intervals: ' + f['s_interval'])
-    print('Population Mean: ' + f['real_means'])
+    print('Steps: ' + f['steps'])
+    print('Learning Rate: ' + f['learning_rate'])
+    print('Real mean: ' + f['real_mean'])
+    print('Interval: ' + f['s_interval'])
+    print('Starting estimated mean: ' + f['est_mean'])
+    print('Interval: ' + f['s_interval'])
 
+    plt.ylabel('Error')
+    plt.xlabel('Iteration')
+    plt.title('Error vs. Iteration')
     plt.plot(f['estimated_means_dict'],f['second_derivatives_dict'])
     plt.show()
