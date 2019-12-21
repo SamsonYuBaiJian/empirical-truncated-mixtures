@@ -1,5 +1,5 @@
-# Mathematics and Machine Learning Research
-Algorithms from Gaussian distribution research with Dr. Ioannis Panageas from the Singapore University of Technology and Design.
+# Empirical Truncated Mixture
+Empirical truncated Gaussian mixture research with Dr. Ioannis Panageas.
 
 ## Usage
 - To compile Cython code, enter 'python3 setup.py build_ext --inplace' in the 'bivariate' or 'univariate' directory.
