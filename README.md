@@ -1,4 +1,4 @@
-# Empirical Truncated Mixture
+# Empirical Truncated Mixtures
 Empirical truncated Gaussian mixture research with Dr. Ioannis Panageas.
 
 ## Usage
