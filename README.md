@@ -20,9 +20,10 @@ Empirical truncated Gaussian mixture research with Dr. Ioannis Panageas.
 - To load experimental results, enter 'univariate.view(/path/to/result/file)'.
 - To view the graphs for the Number of Iterations vs. Denominator experiment, enter 'univariate.plot\_denom(/path/to/univariate/experiments/experiment\_folder)'.
 
-## Experimental Data Format
-### Bivariate
+## Bivariate Data Format
+#### Experiments
+./learning\_rate-real\_means-fixed\_error/est\_means-s\_intervals-denominator-fixed\_error\_step
 
-
-### Univariate
-
+#### Graphs
+- Error vs. iteration graphs: ./error-vs.-iteration/steps-learning\_rate-real\_means-est\_means-s\_intervals-denominator.png
+- Number of iterations vs. denominator graphs:
