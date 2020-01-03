@@ -77,7 +77,7 @@ cpdef run(int steps, double learning_rate, real_means, est_means, s_intervals, f
 
     plt.plot(step_values, error_values)
     plt.savefig('./graphs/error-vs.-iteration/' + str(steps) + '-' + str(learning_rate) + '-' + str(real_means) + '-' + str(est_means) + '-' + str(s_intervals) +  '-' + str(denominator) + '.png')
-    plt.show()
+    # plt.show()
 
     if fixed_error_step is not None:
         # save values for iteration vs. denominator graph
