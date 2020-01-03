@@ -114,11 +114,6 @@ cdef euclidean_distance(real, double est_x1, double est_x2):
     return sqrt(pow((real[0] - est_x1),2) + pow((real[1] - est_x2),2))
 
 
-def help():
-    print("\nFormat: bivariate.run(steps, learning_rate, (x1_real_mean, x2_real_mean), (x1_start_mean, x2_start_mean), [(x1_lower_bound,x1_upper_bound),(x2_lower_bound,x2_upper_bound)], fixed_error_checkpoint)\n")
-    print("\nExample: bivariate.run(10000, 0.01, (4, 4), (10, 10), [(3, 5), (5, 8)], 0.1)\n")
-
-
 def view(data_file_path):
     f = open(str(data_file_path), 'r').readlines()
     f = ast.literal_eval(f[0])
