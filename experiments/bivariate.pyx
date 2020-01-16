@@ -41,21 +41,10 @@ cpdef run(double learning_rate, real_means, est_means, s_intervals, fixed_error)
         step += 1
         prev_error = error
         error = euclidean_distance(real_means, est_x1, est_x2)
-
-        if step % 1000 == 0:
-            print('\n')
-            print('Steps: ' + str(step))
-            print('Learning rate: ' + str(learning_rate))
-            print('Intervals (x1,x2): ' + str(s_intervals))
-            print('Starting estimated means (x1,x2): ' + str(est_means))
-            print('Current estimated means (x1,x2): (' + str(est_x1) +',' + str(est_x2) + ')')
-            print('Real means (x1,x2): ' + str(real_means))
-            print('Error: ' + str(error))
         
         if fixed_error_step is None:
             if prev_error > fixed_error and error < fixed_error:
                 fixed_error_step = step
-                print("Final step for reaching error: " + str(fixed_error_step))
                 break
 
         # step_values.append(step)

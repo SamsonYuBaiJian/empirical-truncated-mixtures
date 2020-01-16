@@ -21,6 +21,7 @@ error_checkpoint = 0.1
 # # for experiments with values close to [1,0]
 # path = './manual'
 # est_means = (1,0)
+# print('\nRunning manual experiments...\n')
 # fixed_error_step, _ = bivariate.run(learning_rate, true_means, est_means, s_intervals, error_checkpoint)
 # save metrics
 # f = open(path, 'w')
@@ -37,14 +38,16 @@ error_checkpoint = 0.1
 
 # for experiments with 1000 random points from uniform distribution --> save points
 path = './random-points'
-num_of_points = 1000
+num_of_points = 100
 all_points = []
 all_fixed_error_steps = []
-points_1 = np.random.uniform(-5,5,num_of_points)
-points_2 = np.random.uniform(-5,5,num_of_points)
+points_1 = np.random.uniform(0,10,num_of_points)
+points_2 = np.random.uniform(0,10,num_of_points)
+print('\nRunning random points experiments...\n')
 for i in range(num_of_points):
     est_means = (points_1[i],points_2[i])
     fixed_error_step, _ = bivariate.run(learning_rate, true_means, est_means, s_intervals, error_checkpoint)
+    print("Point " + str(i+1) + " " + str(est_means) + " fixed error checkpoint: " + str(fixed_error_step))
     all_points.append(est_means)
     all_fixed_error_steps.append(fixed_error_step)
 # save metrics
@@ -62,7 +65,6 @@ save_dict['min_fixed_error_step'] = str(min(all_fixed_error_steps))
 save_dict['avg_fixed_error_step'] = str(sum(all_fixed_error_steps) / len(all_fixed_error_steps))
 save_dict['learning_rate'] = str(learning_rate)
 save_dict['real_means'] = str(true_means)
-save_dict['est_means'] = str(est_means)
 save_dict['s_intervals'] = str(s_intervals)
 save_dict['error_checkpoint'] = str(error_checkpoint)
 f.write(str(save_dict))
@@ -75,6 +77,7 @@ f.close()
 # all_fixed_error_steps = []
 # all_denominators = []
 # s_intervals = [(1, 2), (-3, None)]
+# print('\nRunning random points with varying S intervals experiments...\n')
 # for i in np.arange(interval_start, interval_start+10, interval_change):
 #     s_intervals[1] = (s_intervals[1][0], round(i,1))
 #     fixed_error_step, denominator = bivariate.run(learning_rate, true_means, est_means, s_intervals, error_checkpoint)
