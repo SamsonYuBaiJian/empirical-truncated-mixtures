@@ -1,0 +1,172 @@
+\begin{thebibliography}{10}
+
+\bibitem{APMP07}
+Michalis Aristophanous, Bill~C Penney, Mary~K Martel, and Charles~A Pelizzari.
+\newblock A gaussian mixture model for definition of lung tumor volumes in
+  positron emission tomography.
+\newblock {\em Medical physics}, 34(11):4223--4235, 2007.
+
+\bibitem{AK01}
+Sanjeev Arora and Ravi Kannan.
+\newblock Learning mixtures of arbitrary gaussians.
+\newblock In {\em Proceedings on 33rd Annual {ACM} Symposium on Theory of
+  Computing, July 6-8, 2001, Heraklion, Crete, Greece}, pages 247--257, 2001.
+
+\bibitem{BWY15}
+Sivaraman Balakrishnan, Martin~J Wainwright, Bin Yu, et~al.
+\newblock Statistical guarantees for the em algorithm: From population to
+  sample-based analysis.
+\newblock {\em The Annals of Statistics}, 45(1):77--120, 2017.
+
+\bibitem{BF08}
+Michael~J Boedigheimer and John Ferbas.
+\newblock Mixture modeling approach to flow cytometry data.
+\newblock {\em Cytometry Part A: The Journal of the International Society for
+  Analytical Cytology}, 73(5):421--429, 2008.
+
+\bibitem{BM02}
+Damiano Brigo and Fabio Mercurio.
+\newblock Displaced and mixture diffusions for analytically-tractable smile
+  models.
+\newblock In {\em Mathematical Finance—Bachelier Congress 2000}, pages
+  151--174. Springer, 2002.
+
+\bibitem{CDV09}
+Kamalika Chaudhuri, Sanjoy Dasgupta, and Andrea Vattani.
+\newblock Learning mixtures of gaussians using the k-means algorithm.
+\newblock {\em arXiv preprint arXiv:0912.0086}, 2009.
+
+\bibitem{CR08}
+Kamalika Chaudhuri and Satish Rao.
+\newblock Learning mixtures of product distributions using correlations and
+  independence.
+\newblock In {\em COLT}, volume~4, pages 9--20, 2008.
+
+\bibitem{D99}
+Sanjoy Dasgupta.
+\newblock Learning mixtures of gaussians.
+\newblock In {\em 40th Annual Symposium on Foundations of Computer Science,
+  {FOCS} '99, 17-18 October, 1999, New York, NY, {USA}}, pages 634--644, 1999.
+
+\bibitem{DGTZ18}
+Constantinos Daskalakis, Themis Gouleakis, Christos Tzamos, and Manolis
+  Zampetakis.
+\newblock Efficient statistics, in high dimensions, from truncated samples.
+\newblock In {\em 59th {IEEE} Annual Symposium on Foundations of Computer
+  Science, {FOCS} 2018, Paris, France, October 7-9, 2018}, pages 639--649,
+  2018.
+
+\bibitem{DP18}
+Constantinos Daskalakis and Ioannis Panageas.
+\newblock The limit points of (optimistic) gradient descent in min-max
+  optimization.
+\newblock In {\em Advances in Neural Information Processing Systems 31: Annual
+  Conference on Neural Information Processing Systems 2018, NeurIPS 2018, 3-8
+  December 2018, Montr{\'{e}}al, Canada.}, pages 9256--9266, 2018.
+
+\bibitem{DTZ17}
+Constantinos Daskalakis, Christos Tzamos, and Manolis Zampetakis.
+\newblock Ten steps of {EM} suffice for mixtures of two gaussians.
+\newblock In {\em Proceedings of the 30th Conference on Learning Theory, {COLT}
+  2017, Amsterdam, The Netherlands, 7-10 July 2017}, pages 704--710, 2017.
+
+\bibitem{DLR77}
+Arthur Dempster, Nan Laird, and Donald Rubin.
+\newblock Maximum likelihood from incomplete data via the em algorithm.
+\newblock In {\em Journal of the royal statistical society}, pages 1--38, 1977.
+
+\bibitem{F31}
+RA~Fisher.
+\newblock Properties and applications of hh functions.
+\newblock {\em Mathematical tables}, 1:815--852, 1931.
+
+\bibitem{JZBWJ16}
+Chi Jin, Yuchen Zhang, Sivaraman Balakrishnan, Martin~J. Wainwright, and
+  Michael~I. Jordan.
+\newblock Local maxima in the likelihood of gaussian mixture models: Structural
+  results and algorithmic consequences.
+\newblock In {\em Advances in Neural Information Processing Systems 29: Annual
+  Conference on Neural Information Processing Systems 2016, December 5-10,
+  2016, Barcelona, Spain}, pages 4116--4124, 2016.
+
+\bibitem{KMV10}
+Adam~Tauman Kalai, Ankur Moitra, and Gregory Valiant.
+\newblock Efficiently learning mixtures of two gaussians.
+\newblock In {\em Proceedings of the forty-second ACM symposium on Theory of
+  computing}, pages 553--562. ACM, 2010.
+
+\bibitem{KSV05}
+Ravindran Kannan, Hadi Salmasian, and Santosh Vempala.
+\newblock The spectral method for general mixture models.
+\newblock In {\em International Conference on Computational Learning Theory},
+  pages 444--457. Springer, 2005.
+
+\bibitem{PA08}
+Alice Lee and Karl Pearson.
+\newblock {On the Generalised Probable Error in Multiple Normal Correlation}.
+\newblock {\em Biometrika}, 6(1):59--68, 1908.
+
+\bibitem{LS12}
+Gyemin Lee and Clayton Scott.
+\newblock Em algorithms for multivariate gaussian mixture models with truncated
+  and censored data.
+\newblock {\em Computational Statistics \& Data Analysis}, 56(9):2816--2829,
+  2012.
+
+\bibitem{LPPSJR17}
+J.~D. Lee, I.~Panageas, G.~Piliouras, M.~Simchowitz, M.~I. Jordan, and
+  B.~Recht.
+\newblock First-order methods almost always avoid saddle points.
+\newblock In {\em To appear in Math. Programming}, 2017.
+
+\bibitem{LSJR16}
+Jason~D Lee, Max Simchowitz, Michael~I Jordan, and Benjamin Recht.
+\newblock Gradient descent only converges to minimizers.
+\newblock In {\em Conference on Learning Theory}, pages 1246--1257, 2016.
+
+\bibitem{MJ88}
+GJ~McLachlan and PN~Jones.
+\newblock Fitting mixture models to grouped and truncated data via the em
+  algorithm.
+\newblock {\em Biometrics}, pages 571--578, 1988.
+
+\bibitem{MPP15}
+Ruta Mehta, Ioannis Panageas, and Georgios Piliouras.
+\newblock Natural selection as an inhibitor of genetic diversity:
+  Multiplicative weights updates algorithm and a conjecture of haploid
+  genetics.
+\newblock In {\em Proceedings of the 2015 Conference on Innovations in
+  Theoretical Computer Science, {ITCS} 2015, Rehovot, Israel, January 11-13,
+  2015}, page~73, 2015.
+
+\bibitem{MV10}
+Ankur Moitra and Gregory Valiant.
+\newblock Settling the polynomial learnability of mixtures of gaussians.
+\newblock In {\em Foundations of Computer Science (FOCS), 2010 51st Annual IEEE
+  Symposium on}, pages 93--102. IEEE, 2010.
+
+\bibitem{PP17}
+Ioannis Panageas and Georgios Piliouras.
+\newblock Gradient descent only converges to minimizers: Non-isolated critical
+  points and invariant regions.
+\newblock In {\em Innovations of Theoretical Computer Science (ITCS)}, 2017.
+
+\bibitem{R76}
+Donald~B Rubin.
+\newblock Inference and missing data.
+\newblock {\em Biometrika}, 63(3):581--592, 1976.
+
+\bibitem{W83}
+C.F.~Jeff Wu.
+\newblock On the convergence properties of the em algorithm.
+\newblock In {\em The Annals of statistics}, pages 95--103, 1983.
+
+\bibitem{XHM16}
+Ji~Xu, Daniel~J. Hsu, and Arian Maleki.
+\newblock Global analysis of expectation maximization for mixtures of two
+  gaussians.
+\newblock In {\em Advances in Neural Information Processing Systems 29: Annual
+  Conference on Neural Information Processing Systems 2016, December 5-10,
+  2016, Barcelona, Spain}, pages 2676--2684, 2016.
+
+\end{thebibliography}

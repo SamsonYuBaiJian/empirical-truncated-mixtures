@@ -1,0 +1,16 @@
+def view(data_file_path):
+    f = open(str(data_file_path), 'r').readlines()
+    f = ast.literal_eval(f[0])
+    print('\n')
+    print('Steps: ' + f['steps'])
+    print('Learning Rate: ' + f['learning_rate'])
+    print('Real means (x1,x2): ' + f['real_means'])
+    print('Starting estimated means (x1, x2): ' + f['est_means'])
+    print('Intervals (x1,x2): ' + f['s_intervals'])
+    print('Denominator: ' + f['denominator'])
+
+    plt.ylabel('Error')
+    plt.xlabel('Iteration')
+    plt.title('Error vs. Iteration')
+    plt.plot(f['step_values'], f['error_values'])
+    plt.show()
