@@ -13,6 +13,7 @@ data_dict = ast.literal_eval(data_dict[0])
 
 # get histogram
 plt.hist(data_dict['fixed_error_steps'])
+plt.title("Fixed Error Step Values")
 plt.show()
 
 # get scatter plot
@@ -23,4 +24,16 @@ for est_point in data_dict['points']:
     distances.append(euclidean_distance(real, est_point))
 
 sns.regplot(distances, data_dict['fixed_error_steps'])
+plt.title("Fixed Error Step Values vs. Distance")
+plt.show()
+
+
+# get graph for S interval stretch
+data_file_path = './random-points-vary-s/experiment-1'
+
+data_dict = open(str(data_file_path), 'r').readlines()
+data_dict = ast.literal_eval(data_dict[0])
+
+plt.title('Fixed Error Step vs. Denominator')
+plt.plot(data_dict['denominators'], data_dict['fixed_error_steps'])
 plt.show()
