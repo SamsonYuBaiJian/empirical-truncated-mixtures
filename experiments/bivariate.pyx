@@ -23,25 +23,28 @@ lib.top_x2_est.argtypes = (ctypes.c_int, ctypes.POINTER(ctypes.c_double), ctypes
 lib.bottom_est.restype = ctypes.c_double
 lib.bottom_est.argtypes = (ctypes.c_int, ctypes.POINTER(ctypes.c_double), ctypes.c_void_p)
 
-cpdef run(double learning_rate, real_means, est_means, s_intervals, fixed_error):
+cpdef run(double learning_rate, real_means, est_means, s_intervals, epsilon):
     plt.ylabel('Error')
-    plt.xlabel('No. of Iterations')
-    plt.title('2D Error vs. No. of Iterations')
+    plt.xlabel('Iteration')
+    plt.title('Error vs. Iteration')
 
     est_x1 = est_means[0]
     est_x2 = est_means[1]
     step_values = []
     error_values = []
-    fixed_error_step = None
+    epsilon_step = None
     error = 1e15
 
-    for i in range(1,10001):
+    step = 0
+
+    while True:
+        step += 1
         prev_error = error
         error = euclidean_distance(real_means, est_x1, est_x2)
 
-        if i % 1000 == 0:
+        if step % 1000 == 0:
             print('\n')
-            print('Steps: ' + str(i))
+            print('Steps: ' + str(step))
             print('Learning rate: ' + str(learning_rate))
             print('Intervals (x1,x2): ' + str(s_intervals))
             print('Starting estimated means (x1,x2): ' + str(est_means))
@@ -49,8 +52,14 @@ cpdef run(double learning_rate, real_means, est_means, s_intervals, fixed_error)
             print('Real means (x1,x2): ' + str(real_means))
             print('Error: ' + str(error))
 
-        step_values.append(i)
-        error_values.append(error)
+        if epsilon_step is None:
+            if prev_error > epsilon and error < epsilon:
+                epsilon_step = step
+                print("Final step for reaching error: " + str(epsilon_step))
+                break
+
+        # step_values.append(i)
+        # error_values.append(error)
         temp_est_x1 = est_x1
         temp_est_x2 = est_x2
 
@@ -70,10 +79,10 @@ cpdef run(double learning_rate, real_means, est_means, s_intervals, fixed_error)
     
     denominator = get_denominator(s_intervals, integrand_bottom_real, c)
 
-    plt.plot(step_values, error_values)
-    plt.show()
+    # plt.plot(step_values, error_values)
+    # plt.show()
 
-    return fixed_error_step, denominator
+    return epsilon_step, denominator
 
 
 def expectation(intervals, integrand_top, integrand_bottom, est_or_real_mean):
@@ -106,7 +115,7 @@ def plot_denom(path):
     plt.xlabel('Denominator')
     plt.title('Number of Iterations vs. Denominator (Error Checkpoint = ' + error_checkpoint + ')')
 
-    fixed_error_steps = []
+    epsilon_steps = []
     denominators = []
 
     graph_dict = {}
@@ -116,9 +125,9 @@ def plot_denom(path):
     
     for key in sorted(graph_dict.keys()):
         denominators.append(key)
-        fixed_error_steps.append(graph_dict[key])
+        epsilon_steps.append(graph_dict[key])
 
     # plt.xticks(np.arange(denominators[0], denominators[-1], 0.1))
-    # plt.yticks(np.arange(fixed_error_steps[0], fixed_error_steps[-1], 10))
-    plt.plot(denominators, fixed_error_steps)
+    # plt.yticks(np.arange(epsilon_steps[0], epsilon_steps[-1], 10))
+    plt.plot(denominators, epsilon_steps)
     plt.show()

@@ -2,38 +2,45 @@ import ast
 import matplotlib.pyplot as plt
 import math
 import seaborn as sns
+import argparse
 
 def euclidean_distance(real, est):
     return math.sqrt(pow((real[0] - est[0]),2) + pow((real[1] - est[1]),2))
 
-data_file_path = './random-points/experiment-1'
+def main(exp_type, data_file_path):
+    if exp_type == 'random_points':
+        data_dict = open(str(data_file_path), 'r').readlines()
+        data_dict = ast.literal_eval(data_dict[0])
 
-data_dict = open(str(data_file_path), 'r').readlines()
-data_dict = ast.literal_eval(data_dict[0])
+        # get histogram
+        plt.hist(data_dict['epsilon_steps'])
+        plt.title("Epsilon Steps")
+        plt.show()
 
-# get histogram
-plt.hist(data_dict['fixed_error_steps'])
-plt.title("Fixed Error Step Values")
-plt.show()
+        # get scatter plot
+        distances = []
+        true_mean = ast.literal_eval(data_dict['true_means'])
 
-# get scatter plot
-distances = []
-real = ast.literal_eval(data_dict['real_means'])
+        for est_mean in data_dict['est_means']:
+            distances.append(euclidean_distance(true_mean, est_mean))
 
-for est_point in data_dict['points']:
-    distances.append(euclidean_distance(real, est_point))
+        sns.regplot(distances, data_dict['epsilon_steps'])
+        plt.title("Epsilon Step vs. Distance")
+        plt.show()
 
-sns.regplot(distances, data_dict['fixed_error_steps'])
-plt.title("Fixed Error Step Values vs. Distance")
-plt.show()
+    elif exp_type == 'random_points_vary_s':
+        # get graph for S interval stretch
+        data_dict = open(str(data_file_path), 'r').readlines()
+        data_dict = ast.literal_eval(data_dict[0])
 
+        plt.title('Epsilon Step vs. Denominator')
+        plt.plot(data_dict['denominators'], data_dict['epsilon_steps'])
+        plt.show()
 
-# get graph for S interval stretch
-data_file_path = './random-points-vary-s/experiment-2'
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--exp_type')
+    parser.add_argument('--data_file_path')
+    args = parser.parse_args()
 
-data_dict = open(str(data_file_path), 'r').readlines()
-data_dict = ast.literal_eval(data_dict[0])
-
-plt.title('Fixed Error Step vs. Denominator')
-plt.plot(data_dict['denominators'], data_dict['fixed_error_steps'])
-plt.show()
+    main(args.exp_type, args.data_file_path)
