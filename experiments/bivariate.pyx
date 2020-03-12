@@ -25,8 +25,8 @@ lib.bottom_est.argtypes = (ctypes.c_int, ctypes.POINTER(ctypes.c_double), ctypes
 
 cpdef run(double learning_rate, real_means, est_means, s_intervals, fixed_error):
     plt.ylabel('Error')
-    plt.xlabel('Iteration')
-    plt.title('Error vs. Iteration')
+    plt.xlabel('No. of Iterations')
+    plt.title('2D Error vs. No. of Iterations')
 
     est_x1 = est_means[0]
     est_x2 = est_means[1]
@@ -35,31 +35,22 @@ cpdef run(double learning_rate, real_means, est_means, s_intervals, fixed_error)
     fixed_error_step = None
     error = 1e15
 
-    step = 0
-
-    while True:
-        step += 1
+    for i in range(1,10001):
         prev_error = error
         error = euclidean_distance(real_means, est_x1, est_x2)
 
-        if step % 1000 == 0:
+        if i % 1000 == 0:
             print('\n')
-            print('Steps: ' + str(step))
+            print('Steps: ' + str(i))
             print('Learning rate: ' + str(learning_rate))
             print('Intervals (x1,x2): ' + str(s_intervals))
             print('Starting estimated means (x1,x2): ' + str(est_means))
             print('Current estimated means (x1,x2): (' + str(est_x1) +',' + str(est_x2) + ')')
             print('Real means (x1,x2): ' + str(real_means))
             print('Error: ' + str(error))
-        
-        if fixed_error_step is None:
-            if prev_error > fixed_error and error < fixed_error:
-                fixed_error_step = step
-                print("Final step for reaching error: " + str(fixed_error_step))
-                break
 
-        # step_values.append(step)
-        # error_values.append(error)
+        step_values.append(i)
+        error_values.append(error)
         temp_est_x1 = est_x1
         temp_est_x2 = est_x2
 
@@ -79,9 +70,8 @@ cpdef run(double learning_rate, real_means, est_means, s_intervals, fixed_error)
     
     denominator = get_denominator(s_intervals, integrand_bottom_real, c)
 
-    # plt.plot(step_values, error_values)
-    # plt.savefig('./graphs/error-vs.-iteration/' + str(steps) + '-' + str(learning_rate) + '-' + str(real_means) + '-' + str(est_means) + '-' + str(s_intervals) +  '-' + str(denominator) + '.png')
-    # plt.show()
+    plt.plot(step_values, error_values)
+    plt.show()
 
     return fixed_error_step, denominator
 

@@ -75,7 +75,7 @@ all_denominators = []
 s_intervals = [(1, 2), (-3, None)]
 interval_start = 0
 interval_change = 0.1
-est_means = (1,0)
+est_means = (0.9,0.1)
 for i in np.arange(interval_start, interval_start+10, interval_change):
     s_intervals[1] = (s_intervals[1][0], round(i,1))
     fixed_error_step, denominator = bivariate.run(learning_rate, true_means, est_means, s_intervals, error_checkpoint)

@@ -29,7 +29,7 @@ plt.show()
 
 
 # get graph for S interval stretch
-data_file_path = './random-points-vary-s/experiment-1'
+data_file_path = './random-points-vary-s/experiment-2'
 
 data_dict = open(str(data_file_path), 'r').readlines()
 data_dict = ast.literal_eval(data_dict[0])
