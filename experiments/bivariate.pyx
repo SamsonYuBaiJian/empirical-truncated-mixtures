@@ -23,15 +23,10 @@ lib.top_x2_est.argtypes = (ctypes.c_int, ctypes.POINTER(ctypes.c_double), ctypes
 lib.bottom_est.restype = ctypes.c_double
 lib.bottom_est.argtypes = (ctypes.c_int, ctypes.POINTER(ctypes.c_double), ctypes.c_void_p)
 
-cpdef run(double learning_rate, real_means, est_means, s_intervals, epsilon):
-    plt.ylabel('Error')
-    plt.xlabel('Iteration')
-    plt.title('Error vs. Iteration')
 
+cpdef run(double learning_rate, real_means, est_means, s_intervals, epsilon):
     est_x1 = est_means[0]
     est_x2 = est_means[1]
-    step_values = []
-    error_values = []
     epsilon_step = None
     error = 1e15
 
@@ -43,13 +38,10 @@ cpdef run(double learning_rate, real_means, est_means, s_intervals, epsilon):
         error = euclidean_distance(real_means, est_x1, est_x2)
 
         if step == 1:
-            # print('Steps: ' + str(step))
             print('Learning rate: ' + str(learning_rate))
             print('Starting estimated means: ' + str(est_means))
-            # print('Current estimated means: (' + str(est_x1) +',' + str(est_x2) + ')')
             print('True means: ' + str(real_means))
             print('Intervals: ' + str(s_intervals))
-            # print('Error: ' + str(error))
 
         if epsilon_step is None:
             if prev_error > epsilon and error < epsilon:
@@ -57,13 +49,11 @@ cpdef run(double learning_rate, real_means, est_means, s_intervals, epsilon):
                 print("Final step for reaching error: " + str(epsilon_step) + "\n")
                 break
 
-        # step_values.append(i)
-        # error_values.append(error)
         temp_est_x1 = est_x1
         temp_est_x2 = est_x2
 
         c = ctypes.c_double * 4
-        c = c(temp_est_x1,temp_est_x2,real_means[0],real_means[1])
+        c = c(temp_est_x1, temp_est_x2, real_means[0], real_means[1])
         user_data = ctypes.cast(ctypes.pointer(c), ctypes.c_void_p)
 
         integrand_top_x1_real = LowLevelCallable(lib.top_x1_real, user_data)
@@ -73,60 +63,27 @@ cpdef run(double learning_rate, real_means, est_means, s_intervals, epsilon):
         integrand_top_x2_est = LowLevelCallable(lib.top_x2_est, user_data)
         integrand_bottom_est = LowLevelCallable(lib.bottom_est, user_data)
 
-        est_x1 = temp_est_x1 + learning_rate * (expectation(s_intervals, integrand_top_x1_real, integrand_bottom_real, c) - expectation(s_intervals, integrand_top_x1_est,integrand_bottom_est, c))
-        est_x2 = temp_est_x2 + learning_rate * (expectation(s_intervals, integrand_top_x2_real, integrand_bottom_real, c) - expectation(s_intervals, integrand_top_x2_est,integrand_bottom_est, c))
+        est_x1 = temp_est_x1 + learning_rate * (expectation(s_intervals, integrand_top_x1_real, integrand_bottom_real) - expectation(s_intervals, integrand_top_x1_est, integrand_bottom_est))
+        est_x2 = temp_est_x2 + learning_rate * (expectation(s_intervals, integrand_top_x2_real, integrand_bottom_real) - expectation(s_intervals, integrand_top_x2_est, integrand_bottom_est))
     
-    denominator = get_denominator(s_intervals, integrand_bottom_real, c)
-
-    # plt.plot(step_values, error_values)
-    # plt.show()
+    denominator = get_denominator(s_intervals, integrand_bottom_real)
+    print(denominator)
 
     return epsilon_step, denominator
 
 
-def expectation(intervals, integrand_top, integrand_bottom, est_or_real_mean):
-    top = integrate.dblquad(integrand_top, intervals[0][0], intervals[0][1], intervals[1][0], intervals[1][1], args=(est_or_real_mean))[0]
-    bottom = integrate.dblquad(integrand_bottom, intervals[0][0], intervals[0][1], intervals[1][0], intervals[1][1], args=(est_or_real_mean))[0]
+def expectation(intervals, integrand_top, integrand_bottom):
+    top = integrate.dblquad(integrand_top, intervals[0][0], intervals[0][1], intervals[1][0], intervals[1][1])[0]
+    bottom = integrate.dblquad(integrand_bottom, intervals[0][0], intervals[0][1], intervals[1][0], intervals[1][1])[0]
     try:
         return top / bottom
     except:
         print("Bottom is too small. Please try again.")
 
 
-def get_denominator(intervals, integrand_bottom, est_or_real_mean):
-    return integrate.dblquad(integrand_bottom, intervals[0][0], intervals[0][1], intervals[1][0], intervals[1][1], args=(est_or_real_mean))[0]
+def get_denominator(intervals, integrand_bottom):
+    return integrate.dblquad(integrand_bottom, intervals[0][0], intervals[0][1], intervals[1][0], intervals[1][1])[0]
 
 
 cdef euclidean_distance(real, double est_x1, double est_x2):
-    return sqrt(pow((real[0] - est_x1),2) + pow((real[1] - est_x2),2))
-
-
-def plot_denom(path):
-    assert os.path.exists(path)
-
-    files = os.listdir(path)
-
-    assert len(files) > 0
-
-    error_checkpoint = str(path.split('/')[-1].split('-')[-1])
-
-    plt.ylabel('Number of Iterations')
-    plt.xlabel('Denominator')
-    plt.title('Number of Iterations vs. Denominator (Error Checkpoint = ' + error_checkpoint + ')')
-
-    epsilon_steps = []
-    denominators = []
-
-    graph_dict = {}
-
-    for file in files:
-        graph_dict[round(float(str(file.split('/')[-1].split('-')[-2])),3)] = int(str(file.split('/')[-1].split('-')[-1]))
-    
-    for key in sorted(graph_dict.keys()):
-        denominators.append(key)
-        epsilon_steps.append(graph_dict[key])
-
-    # plt.xticks(np.arange(denominators[0], denominators[-1], 0.1))
-    # plt.yticks(np.arange(epsilon_steps[0], epsilon_steps[-1], 10))
-    plt.plot(denominators, epsilon_steps)
-    plt.show()
+    return sqrt(pow((real[0] - est_x1), 2) + pow((real[1] - est_x2), 2))

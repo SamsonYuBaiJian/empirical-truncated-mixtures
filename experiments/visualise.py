@@ -14,7 +14,7 @@ def main(exp_type, data_file_path):
 
         # get histogram
         plt.hist(data_dict['epsilon_steps'])
-        plt.title("Epsilon Steps")
+        # plt.title("Epsilon Steps")
         plt.show()
 
         # get scatter plot
@@ -25,7 +25,7 @@ def main(exp_type, data_file_path):
             distances.append(euclidean_distance(true_mean, est_mean))
 
         sns.regplot(distances, data_dict['epsilon_steps'])
-        plt.title("Epsilon Step vs. Distance")
+        # plt.title("Epsilon Step vs. Distance")
         plt.show()
 
     elif exp_type == 'random_points_vary_s':
@@ -33,7 +33,7 @@ def main(exp_type, data_file_path):
         data_dict = open(str(data_file_path), 'r').readlines()
         data_dict = ast.literal_eval(data_dict[0])
 
-        plt.title('Epsilon Step vs. Denominator')
+        # plt.title('Epsilon Step vs. Denominator')
         plt.plot(data_dict['denominators'], data_dict['epsilon_steps'])
         plt.show()
 
@@ -41,7 +41,7 @@ def main(exp_type, data_file_path):
         data_dict = open(str(data_file_path), 'r').readlines()
         data_dict = ast.literal_eval(data_dict[0])
 
-        plt.title('Epsilon Step vs. Denominator')
+        # plt.title('Epsilon Step vs. Denominator')
         plt.plot(data_dict['denominators'], data_dict['epsilon_steps'])
         plt.show()
 
