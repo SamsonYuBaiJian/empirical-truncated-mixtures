@@ -24,7 +24,12 @@ def main(exp_type):
             os.makedirs(path)
         epsilon_step, _ = bivariate.run(learning_rate, true_means, est_means, s_intervals, epsilon)
         # save metrics
-        f = open(path, 'w')
+        experiment_nos = [int(f.split('-')[-1]) for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]
+        if len(experiment_nos) == 0:
+            target_no = 1
+        else:
+            target_no = max(experiment_nos) + 1
+        f = open(path + '/experiment-' + str(target_no), 'w')
         save_dict = {}
         save_dict['epsilon_step'] = str(epsilon_step)
         save_dict['learning_rate'] = str(learning_rate)

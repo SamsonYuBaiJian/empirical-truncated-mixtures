@@ -37,6 +37,14 @@ def main(exp_type, data_file_path):
         plt.plot(data_dict['denominators'], data_dict['epsilon_steps'])
         plt.show()
 
+    elif exp_type == 'single_point':
+        data_dict = open(str(data_file_path), 'r').readlines()
+        data_dict = ast.literal_eval(data_dict[0])
+
+        plt.title('Epsilon Step vs. Denominator')
+        plt.plot(data_dict['denominators'], data_dict['epsilon_steps'])
+        plt.show()
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--exp_type')
