@@ -27,7 +27,6 @@ lib.bottom_est.argtypes = (ctypes.c_int, ctypes.POINTER(ctypes.c_double), ctypes
 cpdef run(double learning_rate, real_means, est_means, s_intervals, epsilon):
     est_x1 = est_means[0]
     est_x2 = est_means[1]
-    epsilon_step = None
     error = 1e15
 
     step = 0
@@ -43,11 +42,10 @@ cpdef run(double learning_rate, real_means, est_means, s_intervals, epsilon):
             print('True means: ' + str(real_means))
             print('Intervals: ' + str(s_intervals))
 
-        if epsilon_step is None:
-            if prev_error > epsilon and error < epsilon:
-                epsilon_step = step
-                print("Final step for reaching error: " + str(epsilon_step) + "\n")
-                break
+        if prev_error > epsilon and error < epsilon:
+            epsilon_step = step
+            print("Final step for reaching error: " + str(epsilon_step) + "\n")
+            break
 
         temp_est_x1 = est_x1
         temp_est_x2 = est_x2
@@ -67,7 +65,6 @@ cpdef run(double learning_rate, real_means, est_means, s_intervals, epsilon):
         est_x2 = temp_est_x2 + learning_rate * (expectation(s_intervals, integrand_top_x2_real, integrand_bottom_real) - expectation(s_intervals, integrand_top_x2_est, integrand_bottom_est))
     
     denominator = get_denominator(s_intervals, integrand_bottom_real)
-    print(denominator)
 
     return epsilon_step, denominator
 
@@ -81,8 +78,8 @@ def expectation(intervals, integrand_top, integrand_bottom):
         print("Bottom is too small. Please try again.")
 
 
-def get_denominator(intervals, integrand_bottom):
-    return integrate.dblquad(integrand_bottom, intervals[0][0], intervals[0][1], intervals[1][0], intervals[1][1])[0]
+def get_denominator(intervals, integrand_bottom_real):
+    return integrate.dblquad(integrand_bottom_real, intervals[0][0], intervals[0][1], intervals[1][0], intervals[1][1])[0]
 
 
 cdef euclidean_distance(real, double est_x1, double est_x2):
