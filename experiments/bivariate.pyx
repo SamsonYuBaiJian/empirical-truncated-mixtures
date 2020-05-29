@@ -79,7 +79,8 @@ def expectation(intervals, integrand_top, integrand_bottom):
 
 
 def get_denominator(intervals, integrand_bottom_real):
-    return integrate.dblquad(integrand_bottom_real, intervals[0][0], intervals[0][1], intervals[1][0], intervals[1][1])[0]
+    normalising_constant = 0.5 / (2 * math.pi)
+    return normalising_constant * integrate.dblquad(integrand_bottom_real, intervals[0][0], intervals[0][1], intervals[1][0], intervals[1][1])[0]
 
 
 cdef euclidean_distance(real, double est_x1, double est_x2):

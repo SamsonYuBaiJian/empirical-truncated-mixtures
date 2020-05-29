@@ -4,17 +4,21 @@ import math
 import seaborn as sns
 import argparse
 
+
 def euclidean_distance(real, est):
     return math.sqrt(pow((real[0] - est[0]),2) + pow((real[1] - est[1]),2))
 
-def main(exp_type, data_file_path):
+def main(exp_type, data_file_path, graph_type):
     if exp_type == 'random_points':
         data_dict = open(str(data_file_path), 'r').readlines()
         data_dict = ast.literal_eval(data_dict[0])
 
         # get histogram
         plt.hist(data_dict['epsilon_steps'])
-        # plt.title("Epsilon Steps")
+        if graph_type == 'title':
+            plt.title("Epsilon Steps")
+        elif graph_type == 'axes':
+            pass
         plt.show()
 
         # get scatter plot
@@ -25,7 +29,10 @@ def main(exp_type, data_file_path):
             distances.append(euclidean_distance(true_mean, est_mean))
 
         sns.regplot(distances, data_dict['epsilon_steps'])
-        # plt.title("Epsilon Step vs. Distance")
+        if graph_type == 'title':
+            plt.title("Epsilon Step vs. Distance")
+        elif graph_type == 'axes':
+            pass
         plt.show()
 
     elif exp_type == 'random_points_vary_s':
@@ -33,7 +40,11 @@ def main(exp_type, data_file_path):
         data_dict = open(str(data_file_path), 'r').readlines()
         data_dict = ast.literal_eval(data_dict[0])
 
-        # plt.title('Epsilon Step vs. Denominator')
+        if graph_type == 'title':
+            plt.title('Epsilon Step vs. Denominator')
+        elif graph_type == 'axes':
+            plt.xlabel('Measure of the Truncated Set Under "Appropriate Mixture Distribution"')
+            plt.ylabel('Avg No. of Iterations for Error Threshold of 0.1')
         plt.plot(data_dict['denominators'], data_dict['epsilon_steps'])
         plt.show()
 
@@ -41,7 +52,10 @@ def main(exp_type, data_file_path):
         data_dict = open(str(data_file_path), 'r').readlines()
         data_dict = ast.literal_eval(data_dict[0])
 
-        # plt.title('Epsilon Step vs. Denominator')
+        if graph_type == 'title':
+            plt.title('Epsilon Step vs. Denominator')
+        elif graph_type == 'axes':
+            pass
         plt.plot(data_dict['denominators'], data_dict['epsilon_steps'])
         plt.show()
 
@@ -49,6 +63,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--exp_type')
     parser.add_argument('--data_file_path')
+    parser.add_argument('--graph_type')
     args = parser.parse_args()
 
-    main(args.exp_type, args.data_file_path)
+    main(args.exp_type, args.data_file_path, args.graph_type)

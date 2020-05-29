@@ -8,13 +8,14 @@ def main(exp_type):
     interval_change = 0.1
     learning_rate = 0.01
 
-    # true_means = (2.534, 6.395)
-    # est_means = (1,0)
+    true_means = (2.534, 6.395)
+    est_means = (0.9, 0.1)
+    s_intervals = [(1, 2), (-3, 0)]
     # s_intervals = [(1, 2), (-3, 1.5)]
 
-    true_means = (2, 1)
-    est_means = (5, 4)
-    s_intervals = [(-2, 2), (-2, 2)]
+    # true_means = (2, 1)
+    # est_means = (5, 4)
+    # s_intervals = [(-2, 2), (-2, 2)]
 
     epsilon = 0.1
     num_of_points = 100
