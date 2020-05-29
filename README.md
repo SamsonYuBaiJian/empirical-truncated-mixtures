@@ -1,5 +1,5 @@
 # Empirical Truncated Mixtures
-Empirical truncated Gaussian mixture research with Dr. Ioannis Panageas.
+Empirical truncated Gaussian mixture research with Ioannis Panageas and Sai Nagarajan.
 
 ## Requirements
 Make sure you have Python 3, Cython, scipy, matplotlib and seaborn installed.
