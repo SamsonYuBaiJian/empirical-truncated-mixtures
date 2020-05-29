@@ -30,12 +30,12 @@ def main(exp_type, data_file_path, graph_type):
 
         sns.regplot(distances, data_dict['epsilon_steps'])
         if graph_type == 'title':
-            plt.title("Epsilon Step vs. Distance")
+            plt.title("Epsilon Step vs. Initial Distance")
         elif graph_type == 'axes':
             pass
         plt.show()
 
-    elif exp_type == 'random_points_vary_s':
+    elif exp_type == 'single_point_vary_s':
         # get graph for S interval stretch
         data_dict = open(str(data_file_path), 'r').readlines()
         data_dict = ast.literal_eval(data_dict[0])
@@ -53,10 +53,10 @@ def main(exp_type, data_file_path, graph_type):
         data_dict = ast.literal_eval(data_dict[0])
 
         if graph_type == 'title':
-            plt.title('Epsilon Step vs. Denominator')
+            plt.title('2D Error vs. Step')
         elif graph_type == 'axes':
             pass
-        plt.plot(data_dict['denominators'], data_dict['epsilon_steps'])
+        plt.plot(data_dict['steps'], data_dict['errors'])
         plt.show()
 
 if __name__ == '__main__':
