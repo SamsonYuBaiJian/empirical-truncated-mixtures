@@ -17,7 +17,8 @@ def main(exp_type):
         # parameters
         step_limit = 10000
         num_of_points = 100
-        np.random.seed(42)
+        seed = 42
+        np.random.seed(seed)
         true_means = (2.534, 6.395)
         s_intervals = [(1, 2), (-3, 1.5)]
         print_every = 10
@@ -35,7 +36,7 @@ def main(exp_type):
             for j in range(step_limit):
                 final_error_list[j] += error_list[j]
             if (i + 1) % print_every == 0:
-                print(str(i) + "/" + str(num_of_points) + " random point(s) done.")
+                print(str(i + 1) + "/" + str(num_of_points) + " random point(s) done.")
         for i in range(step_limit):
             final_error_list[i] /= num_of_points
         # save metrics
@@ -52,8 +53,12 @@ def main(exp_type):
         save_dict['true_means'] = str(true_means)
         save_dict['est_means'] = all_est_means
         save_dict['s_intervals'] = str(s_intervals)
+        save_dict['step_limit'] = str(step_limit)
+        save_dict['num_of_points'] = str(num_of_points)
+        save_dict['seed'] = str(seed)
         f.write(str(save_dict))
         f.close()
+        print("Done.")
 
     # for histogram and scatter with random points from uniform distribution
     elif exp_type == 'random_points_epsilon_and_step':
@@ -64,7 +69,8 @@ def main(exp_type):
 
         # parameters
         num_of_points = 100
-        np.random.seed(42)
+        seed = 42
+        np.random.seed(seed)
         true_means = (2.534, -6.395)
         s_intervals = [(1, 2), (-3, 1.5)]
 
@@ -79,7 +85,7 @@ def main(exp_type):
             all_est_means.append(est_means)
             all_epsilon_steps.append(epsilon_step)
             if (i + 1) % print_every == 0:
-                print(str(i) + "/" + str(num_of_points) + " random point(s) done.")
+                print(str(i + 1) + "/" + str(num_of_points) + " random point(s) done.")
         # save metrics
         experiment_nos = [int(f.split('-')[-1]) for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]
         if len(experiment_nos) == 0:
@@ -97,8 +103,11 @@ def main(exp_type):
         save_dict['est_means'] = all_est_means
         save_dict['s_intervals'] = str(s_intervals)
         save_dict['epsilon'] = str(epsilon)
+        save_dict['num_of_points'] = str(num_of_points)
+        save_dict['seed'] = str(seed)
         f.write(str(save_dict))
         f.close()
+        print("Done.")
 
     # for experiments with single point, varying S intervals
     elif exp_type == 'single_point_vary_s':
@@ -145,6 +154,7 @@ def main(exp_type):
         save_dict['epsilon'] = str(epsilon)
         f.write(str(save_dict))
         f.close()
+        print("Done.")
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
