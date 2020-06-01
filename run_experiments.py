@@ -34,7 +34,7 @@ def main(exp_type):
             all_est_means.append(est_means)
             for j in range(step_limit):
                 final_error_list[j] += error_list[j]
-            if i % print_every == 0:
+            if (i + 1) % print_every == 0:
                 print(str(i) + "/" + str(num_of_points) + " random point(s) done.")
         for i in range(step_limit):
             final_error_list[i] /= num_of_points
@@ -78,7 +78,7 @@ def main(exp_type):
             epsilon_step, _ = bivariate.run(None, learning_rate, true_means, est_means, s_intervals, epsilon)
             all_est_means.append(est_means)
             all_epsilon_steps.append(epsilon_step)
-            if i % print_every == 0:
+            if (i + 1) % print_every == 0:
                 print(str(i) + "/" + str(num_of_points) + " random point(s) done.")
         # save metrics
         experiment_nos = [int(f.split('-')[-1]) for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]
