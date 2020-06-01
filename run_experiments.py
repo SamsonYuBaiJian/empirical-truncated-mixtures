@@ -5,28 +5,35 @@ import argparse
 
 def main(exp_type):
     all_est_means = []
-    interval_change = 0.1
     learning_rate = 0.01
-
-    true_means = (2.534, 6.395)
-    est_means = (1, 0)
-    # s_intervals = [(1, 2), (-3, 0)]
-    s_intervals = [(1, 2), (-3, 1.5)]
-
-    # true_means = (2, 1)
-    # est_means = (5, 4)
-    # s_intervals = [(-2, 2), (-2, 2)]
-
     epsilon = 0.1
-    num_of_points = 100
-    np.random.seed(42)
 
-    # for Error vs Step experiment for a single point
-    if exp_type == 'single_point':
-        path = './experiments/single_point'
+    # for Error vs Step experiment with random points from uniform distribution
+    if exp_type == 'random_points_error_vs_step':
+        path = './experiments/' + exp_type
         if not os.path.exists(path):
             os.makedirs(path)
-        step_list, error_list = bivariate.run('single_point', learning_rate, true_means, est_means, s_intervals, epsilon)
+
+        # parameters
+        step_limit = 10000
+        num_of_points = 50
+        np.random.seed(42)
+        true_means = (2.534, 6.395)
+        s_intervals = [(1, 2), (-3, 1.5)]
+
+        points_1 = np.random.uniform(0,7,num_of_points)
+        points_2 = np.random.uniform(0,7,num_of_points)
+        all_est_means = []
+        final_error_list = []
+
+        for i in range(num_of_points):
+            est_means = (points_1[i],points_2[i])
+            step_list, error_list = bivariate.run(step_limit, learning_rate, true_means, est_means, s_intervals, epsilon)
+            all_est_means.append(est_means)
+            for j in range(step_limit):
+                final_error_list[j] += error_list[j]
+        for i in range(step_limit):
+            final_error_list[i] /= num_of_points
         # save metrics
         experiment_nos = [int(f.split('-')[-1]) for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]
         if len(experiment_nos) == 0:
@@ -36,26 +43,35 @@ def main(exp_type):
         f = open(path + '/experiment-' + str(target_no), 'w')
         save_dict = {}
         save_dict['steps'] = step_list
-        save_dict['errors'] = error_list
+        save_dict['errors'] = final_error_list
         save_dict['learning_rate'] = str(learning_rate)
         save_dict['true_means'] = str(true_means)
-        save_dict['est_means'] = str(est_means)
+        save_dict['est_means'] = all_est_means
         save_dict['s_intervals'] = str(s_intervals)
         f.write(str(save_dict))
         f.close()
 
-    # for experiments with 100 random points from uniform distribution --> save points
-    elif exp_type == 'random_points':
-        path = './experiments/random_points'
+    # for histogram and scatter with random points from uniform distribution
+    elif exp_type == 'random_points_epsilon_and_step':
+        path = './experiments/' + exp_type
         if not os.path.exists(path):
             os.makedirs(path)
         all_epsilon_steps = []
-        points_1 = np.random.uniform(-5,5,num_of_points)
-        points_2 = np.random.uniform(-5,5,num_of_points)
+
+        # parameters
+        num_of_points = 50
+        np.random.seed(42)
+        true_means = (2.534, -6.395)
+        s_intervals = [(1, 2), (-3, 1.5)]
+
+        points_1 = np.random.uniform(0,7,num_of_points)
+        points_2 = np.random.uniform(-7,0,num_of_points)
         all_est_means = []
+
         for i in range(num_of_points):
+            est_means = (points_1[i],points_2[i])
             epsilon_step, _ = bivariate.run(None, learning_rate, true_means, est_means, s_intervals, epsilon)
-            all_est_means.append((points_1[i],points_2[i]))
+            all_est_means.append(est_means)
             all_epsilon_steps.append(epsilon_step)
         # save metrics
         experiment_nos = [int(f.split('-')[-1]) for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]
@@ -71,7 +87,7 @@ def main(exp_type):
         save_dict['avg_epsilon_step'] = str(sum(all_epsilon_steps) / len(all_epsilon_steps))
         save_dict['learning_rate'] = str(learning_rate)
         save_dict['true_means'] = str(true_means)
-        save_dict['est_means'] = str(all_est_means)
+        save_dict['est_means'] = all_est_means
         save_dict['s_intervals'] = str(s_intervals)
         save_dict['epsilon'] = str(epsilon)
         f.write(str(save_dict))
@@ -79,11 +95,21 @@ def main(exp_type):
 
     # for experiments with single point, varying S intervals
     elif exp_type == 'single_point_vary_s':
-        path = './experiments/random_points_vary_s'
+        path = './experiments/' + exp_type
         if not os.path.exists(path):
             os.makedirs(path)
         all_epsilon_steps = []
         all_denominators = []
+
+        # parameters
+        interval_change = 0.1
+        est_means = (1, 0)
+        true_means = (-2.534, 6.395)
+        s_intervals = [(1, 2), (-3, 0)]
+        # est_means = (5, 4)
+        # true_means = (2, 1)
+        # s_intervals = [(-2, 2), (-2, 2)]
+
         interval_start = s_intervals[1][1]
         for i in np.arange(interval_start, interval_start+10, interval_change):
             s_intervals[1] = (s_intervals[1][0], round(i,1))

@@ -24,16 +24,15 @@ lib.bottom_est.restype = ctypes.c_double
 lib.bottom_est.argtypes = (ctypes.c_int, ctypes.POINTER(ctypes.c_double), ctypes.c_void_p)
 
 
-cpdef run(exp_type, double learning_rate, real_means, est_means, s_intervals, epsilon):
+cpdef run(step_limit, double learning_rate, real_means, est_means, s_intervals, epsilon):
     est_x1 = est_means[0]
     est_x2 = est_means[1]
     error = 1e15
     step = 0
 
-    if exp_type == 'single_point':
+    if exp_type is not None:
         step_list = []
         error_list = []
-        step_limit = 10000
 
         while step < step_limit:
             step += 1
@@ -103,6 +102,7 @@ cpdef run(exp_type, double learning_rate, real_means, est_means, s_intervals, ep
 
             est_x1 = temp_est_x1 + learning_rate * (expectation(s_intervals, integrand_top_x1_real, integrand_bottom_real) - expectation(s_intervals, integrand_top_x1_est, integrand_bottom_est))
             est_x2 = temp_est_x2 + learning_rate * (expectation(s_intervals, integrand_top_x2_real, integrand_bottom_real) - expectation(s_intervals, integrand_top_x2_est, integrand_bottom_est))
+            print(est_x1, est_x2)
 
         denominator = get_denominator(s_intervals, integrand_bottom_real)
         

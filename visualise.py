@@ -9,7 +9,7 @@ def euclidean_distance(real, est):
     return math.sqrt(pow((real[0] - est[0]),2) + pow((real[1] - est[1]),2))
 
 def main(exp_type, data_file_path, graph_type):
-    if exp_type == 'random_points':
+    if exp_type == 'random_points_epsilon_and_step':
         data_dict = open(str(data_file_path), 'r').readlines()
         data_dict = ast.literal_eval(data_dict[0])
 
@@ -48,7 +48,7 @@ def main(exp_type, data_file_path, graph_type):
         plt.plot(data_dict['denominators'], data_dict['epsilon_steps'])
         plt.show()
 
-    elif exp_type == 'single_point':
+    elif exp_type == 'random_points_error_vs_step':
         data_dict = open(str(data_file_path), 'r').readlines()
         data_dict = ast.literal_eval(data_dict[0])
 
