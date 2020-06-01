@@ -35,7 +35,7 @@ def main(exp_type):
             for j in range(step_limit):
                 final_error_list[j] += error_list[j]
             if i % print_every == 0:
-                print(str(print_every) + "/" + str(num_of_points) + " random point(s) done.")
+                print(str(i) + "/" + str(num_of_points) + " random point(s) done.")
         for i in range(step_limit):
             final_error_list[i] /= num_of_points
         # save metrics
@@ -72,11 +72,14 @@ def main(exp_type):
         points_2 = np.random.uniform(-7,7,num_of_points)
         all_est_means = []
 
+        print("Doing " + str(num_of_points) + " random points for histogram and scatterplot experiments...")
         for i in range(num_of_points):
             est_means = (points_1[i],points_2[i])
             epsilon_step, _ = bivariate.run(None, learning_rate, true_means, est_means, s_intervals, epsilon)
             all_est_means.append(est_means)
             all_epsilon_steps.append(epsilon_step)
+            if i % print_every == 0:
+                print(str(i) + "/" + str(num_of_points) + " random point(s) done.")
         # save metrics
         experiment_nos = [int(f.split('-')[-1]) for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]
         if len(experiment_nos) == 0:
@@ -115,6 +118,8 @@ def main(exp_type):
         # s_intervals = [(-2, 2), (-2, 2)]
 
         interval_start = s_intervals[1][1]
+        
+        print("Doing a single point for interval varying experiment...")
         for i in np.arange(interval_start, interval_start+10, interval_change):
             s_intervals[1] = (s_intervals[1][0], round(i,1))
             epsilon_step, denominator = bivariate.run(None, learning_rate, true_means, est_means, s_intervals, epsilon)
