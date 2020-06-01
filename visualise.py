@@ -1,12 +1,19 @@
 import ast
 import matplotlib.pyplot as plt
-import math
+from math import sqrt
 import seaborn as sns
 import argparse
 
 
 def euclidean_distance(real, est):
-    return math.sqrt(pow((real[0] - est[0]),2) + pow((real[1] - est[1]),2))
+    distance_list = []
+    est_x1 = est[0]
+    est_x2 = est[1]
+    distance_list.append(sqrt(pow((real[0] - (-est_x1)), 2) + pow((real[1] - est_x2), 2)))
+    distance_list.append(sqrt(pow((real[0] - est_x1), 2) + pow((real[1] - (-est_x2)), 2)))
+    distance_list.append(sqrt(pow((real[0] - est_x1), 2) + pow((real[1] - est_x2), 2)))
+    distance_list.append(sqrt(pow((real[0] - (-est_x1)), 2) + pow((real[1] - (-est_x2)), 2)))
+    return min(distance_list)
 
 def main(exp_type, data_file_path, graph_type):
     if exp_type == 'random_points_epsilon_and_step':
@@ -36,7 +43,7 @@ def main(exp_type, data_file_path, graph_type):
         plt.show()
 
     elif exp_type == 'single_point_vary_s':
-        # get graph for S interval stretch
+        # get graph for interval stretch
         data_dict = open(str(data_file_path), 'r').readlines()
         data_dict = ast.literal_eval(data_dict[0])
 

@@ -8,7 +8,7 @@ def main(exp_type):
     learning_rate = 0.01
     epsilon = 0.1
 
-    # for Error vs Step experiment with random points from uniform distribution
+    # for 2D Error vs Step experiment with random points from uniform distribution
     if exp_type == 'random_points_error_vs_step':
         path = './experiments/' + exp_type
         if not os.path.exists(path):
@@ -16,22 +16,26 @@ def main(exp_type):
 
         # parameters
         step_limit = 10000
-        num_of_points = 50
+        num_of_points = 100
         np.random.seed(42)
         true_means = (2.534, 6.395)
         s_intervals = [(1, 2), (-3, 1.5)]
+        print_every = 10
 
-        points_1 = np.random.uniform(0,7,num_of_points)
-        points_2 = np.random.uniform(0,7,num_of_points)
+        points_1 = np.random.uniform(-7,7,num_of_points)
+        points_2 = np.random.uniform(-7,7,num_of_points)
         all_est_means = []
-        final_error_list = []
+        final_error_list = [0] * step_limit
 
+        print("Doing " + str(num_of_points) + " random points for 2D Error vs Step experiment...")
         for i in range(num_of_points):
             est_means = (points_1[i],points_2[i])
             step_list, error_list = bivariate.run(step_limit, learning_rate, true_means, est_means, s_intervals, epsilon)
             all_est_means.append(est_means)
             for j in range(step_limit):
                 final_error_list[j] += error_list[j]
+            if i % print_every == 0:
+                print(str(print_every) + "/" + str(num_of_points) + " random point(s) done.")
         for i in range(step_limit):
             final_error_list[i] /= num_of_points
         # save metrics
@@ -59,13 +63,13 @@ def main(exp_type):
         all_epsilon_steps = []
 
         # parameters
-        num_of_points = 50
+        num_of_points = 100
         np.random.seed(42)
         true_means = (2.534, -6.395)
         s_intervals = [(1, 2), (-3, 1.5)]
 
-        points_1 = np.random.uniform(0,7,num_of_points)
-        points_2 = np.random.uniform(-7,0,num_of_points)
+        points_1 = np.random.uniform(-7,7,num_of_points)
+        points_2 = np.random.uniform(-7,7,num_of_points)
         all_est_means = []
 
         for i in range(num_of_points):

@@ -30,7 +30,7 @@ cpdef run(step_limit, double learning_rate, real_means, est_means, s_intervals, 
     error = 1e15
     step = 0
 
-    if exp_type is not None:
+    if step_limit is not None:
         step_list = []
         error_list = []
 
@@ -39,11 +39,11 @@ cpdef run(step_limit, double learning_rate, real_means, est_means, s_intervals, 
             prev_error = error
             error = euclidean_distance(real_means, est_x1, est_x2)
 
-            if step == 1:
-                print('Learning rate: ' + str(learning_rate))
-                print('Starting estimated means: ' + str(est_means))
-                print('True means: ' + str(real_means))
-                print('Intervals: ' + str(s_intervals))
+            # if step == 1:
+            #     print('Learning rate: ' + str(learning_rate))
+            #     print('Starting estimated means: ' + str(est_means))
+            #     print('True means: ' + str(real_means))
+            #     print('Intervals: ' + str(s_intervals))
 
             step_list.append(step)
             error_list.append(error)
@@ -64,8 +64,6 @@ cpdef run(step_limit, double learning_rate, real_means, est_means, s_intervals, 
 
             est_x1 = temp_est_x1 + learning_rate * (expectation(s_intervals, integrand_top_x1_real, integrand_bottom_real) - expectation(s_intervals, integrand_top_x1_est, integrand_bottom_est))
             est_x2 = temp_est_x2 + learning_rate * (expectation(s_intervals, integrand_top_x2_real, integrand_bottom_real) - expectation(s_intervals, integrand_top_x2_est, integrand_bottom_est))
-
-        print('Done.')
 
         return step_list, error_list
 
@@ -102,7 +100,6 @@ cpdef run(step_limit, double learning_rate, real_means, est_means, s_intervals, 
 
             est_x1 = temp_est_x1 + learning_rate * (expectation(s_intervals, integrand_top_x1_real, integrand_bottom_real) - expectation(s_intervals, integrand_top_x1_est, integrand_bottom_est))
             est_x2 = temp_est_x2 + learning_rate * (expectation(s_intervals, integrand_top_x2_real, integrand_bottom_real) - expectation(s_intervals, integrand_top_x2_est, integrand_bottom_est))
-            print(est_x1, est_x2)
 
         denominator = get_denominator(s_intervals, integrand_bottom_real)
         
@@ -124,4 +121,9 @@ def get_denominator(intervals, integrand_bottom_real):
 
 
 cdef euclidean_distance(real, double est_x1, double est_x2):
-    return sqrt(pow((real[0] - est_x1), 2) + pow((real[1] - est_x2), 2))
+    distance_list = []
+    distance_list.append(sqrt(pow((real[0] - (-est_x1)), 2) + pow((real[1] - est_x2), 2)))
+    distance_list.append(sqrt(pow((real[0] - est_x1), 2) + pow((real[1] - (-est_x2)), 2)))
+    distance_list.append(sqrt(pow((real[0] - est_x1), 2) + pow((real[1] - est_x2), 2)))
+    distance_list.append(sqrt(pow((real[0] - (-est_x1)), 2) + pow((real[1] - (-est_x2)), 2)))
+    return min(distance_list)
