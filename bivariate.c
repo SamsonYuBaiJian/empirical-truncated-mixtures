@@ -1271,7 +1271,6 @@ static const char __pyx_k_argtypes[] = "argtypes";
 static const char __pyx_k_c_double[] = "c_double";
 static const char __pyx_k_c_void_p[] = "c_void_p";
 static const char __pyx_k_exp_type[] = "exp_type";
-static const char __pyx_k_Epsilon_2[] = "Epsilon:";
 static const char __pyx_k_Intervals[] = "Intervals: ";
 static const char __pyx_k_bivariate[] = "bivariate";
 static const char __pyx_k_est_means[] = "est_means";
@@ -1310,7 +1309,6 @@ static PyObject *__pyx_kp_s_;
 static PyObject *__pyx_kp_s_Bottom_is_too_small_Please_try_a;
 static PyObject *__pyx_n_s_CDLL;
 static PyObject *__pyx_kp_s_Epsilon;
-static PyObject *__pyx_kp_s_Epsilon_2;
 static PyObject *__pyx_kp_s_Final_step_for_reaching_error;
 static PyObject *__pyx_kp_s_Intervals;
 static PyObject *__pyx_kp_s_Learning_rate;
@@ -4621,7 +4619,7 @@ static PyObject *__pyx_f_9bivariate_run(PyObject *__pyx_v_exp_type, double __pyx
  *                 print('Starting estimated means: ' + str(est_means))
  *                 print('True means: ' + str(real_means))             # <<<<<<<<<<<<<<
  *                 print('Intervals: ' + str(s_intervals))
- *                 print('Epsilon:' + str(epsilon))
+ *                 print('Epsilon: ' + str(epsilon))
  */
         __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_v_real_means); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 146, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
@@ -4635,7 +4633,7 @@ static PyObject *__pyx_f_9bivariate_run(PyObject *__pyx_v_exp_type, double __pyx
  *                 print('Starting estimated means: ' + str(est_means))
  *                 print('True means: ' + str(real_means))
  *                 print('Intervals: ' + str(s_intervals))             # <<<<<<<<<<<<<<
- *                 print('Epsilon:' + str(epsilon))
+ *                 print('Epsilon: ' + str(epsilon))
  * 
  */
         __pyx_t_1 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_v_s_intervals); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 147, __pyx_L1_error)
@@ -4649,13 +4647,13 @@ static PyObject *__pyx_f_9bivariate_run(PyObject *__pyx_v_exp_type, double __pyx
         /* "bivariate.pyx":148
  *                 print('True means: ' + str(real_means))
  *                 print('Intervals: ' + str(s_intervals))
- *                 print('Epsilon:' + str(epsilon))             # <<<<<<<<<<<<<<
+ *                 print('Epsilon: ' + str(epsilon))             # <<<<<<<<<<<<<<
  * 
  *             if prev_error > epsilon and error < epsilon:
  */
         __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_v_epsilon); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 148, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_1 = PyNumber_Add(__pyx_kp_s_Epsilon_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 148, __pyx_L1_error)
+        __pyx_t_1 = PyNumber_Add(__pyx_kp_s_Epsilon, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 148, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         if (__Pyx_PrintOne(0, __pyx_t_1) < 0) __PYX_ERR(0, 148, __pyx_L1_error)
@@ -4671,7 +4669,7 @@ static PyObject *__pyx_f_9bivariate_run(PyObject *__pyx_v_exp_type, double __pyx
       }
 
       /* "bivariate.pyx":150
- *                 print('Epsilon:' + str(epsilon))
+ *                 print('Epsilon: ' + str(epsilon))
  * 
  *             if prev_error > epsilon and error < epsilon:             # <<<<<<<<<<<<<<
  *                 epsilon_step = step
@@ -4730,7 +4728,7 @@ static PyObject *__pyx_f_9bivariate_run(PyObject *__pyx_v_exp_type, double __pyx
         goto __pyx_L18_break;
 
         /* "bivariate.pyx":150
- *                 print('Epsilon:' + str(epsilon))
+ *                 print('Epsilon: ' + str(epsilon))
  * 
  *             if prev_error > epsilon and error < epsilon:             # <<<<<<<<<<<<<<
  *                 epsilon_step = step
@@ -6743,7 +6741,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_Bottom_is_too_small_Please_try_a, __pyx_k_Bottom_is_too_small_Please_try_a, sizeof(__pyx_k_Bottom_is_too_small_Please_try_a), 0, 0, 1, 0},
   {&__pyx_n_s_CDLL, __pyx_k_CDLL, sizeof(__pyx_k_CDLL), 0, 0, 1, 1},
   {&__pyx_kp_s_Epsilon, __pyx_k_Epsilon, sizeof(__pyx_k_Epsilon), 0, 0, 1, 0},
-  {&__pyx_kp_s_Epsilon_2, __pyx_k_Epsilon_2, sizeof(__pyx_k_Epsilon_2), 0, 0, 1, 0},
   {&__pyx_kp_s_Final_step_for_reaching_error, __pyx_k_Final_step_for_reaching_error, sizeof(__pyx_k_Final_step_for_reaching_error), 0, 0, 1, 0},
   {&__pyx_kp_s_Intervals, __pyx_k_Intervals, sizeof(__pyx_k_Intervals), 0, 0, 1, 0},
   {&__pyx_kp_s_Learning_rate, __pyx_k_Learning_rate, sizeof(__pyx_k_Learning_rate), 0, 0, 1, 0},

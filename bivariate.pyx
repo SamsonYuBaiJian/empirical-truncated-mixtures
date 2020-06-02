@@ -145,7 +145,7 @@ cpdef run(exp_type, double learning_rate, real_means, est_means, s_intervals, ep
                 print('Starting estimated means: ' + str(est_means))
                 print('True means: ' + str(real_means))
                 print('Intervals: ' + str(s_intervals))
-                print('Epsilon:' + str(epsilon))
+                print('Epsilon: ' + str(epsilon))
 
             if prev_error > epsilon and error < epsilon:
                 epsilon_step = step

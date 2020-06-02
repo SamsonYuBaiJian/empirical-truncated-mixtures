@@ -129,8 +129,9 @@ def main(exp_type):
         # parameters
         epsilon = 0.1
         interval_change = 0.5
-        interval_increase = 20
-        est_means = (2.4, 6.2)
+        interval_increase = 20.5
+        # est_means = (2.4, 6.2)
+        est_means = (0.9, 0.1)
         true_means = (2.534, 6.395)
         s_intervals = [(1, 2), (-3, 1.5)]
         # est_means = (3, 2)
