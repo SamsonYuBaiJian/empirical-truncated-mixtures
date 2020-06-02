@@ -129,13 +129,13 @@ def main(exp_type):
         # parameters
         epsilon = 0.1
         interval_change = 0.5
-        interval_increase = 40
-        # est_means = (0.9, 0.1)
-        # true_means = (2.534, 6.395)
-        # s_intervals = [(1, 2), (-3, 1.5)]
-        est_means = (3, 2)
-        true_means = (2, 1)
-        s_intervals = [(-2, 2), (-2, 2)]
+        interval_increase = 20
+        est_means = (2.4, 6.2)
+        true_means = (2.534, 6.395)
+        s_intervals = [(1, 2), (-3, 1.5)]
+        # est_means = (3, 2)
+        # true_means = (2, 1)
+        # s_intervals = [(-2, 2), (-2, 2)]
 
         x_interval_start = s_intervals[0][1]
         x_intervals = np.arange(x_interval_start, x_interval_start+interval_increase, interval_change)
