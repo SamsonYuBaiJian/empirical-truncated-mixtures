@@ -24,13 +24,15 @@ lib.bottom_est.restype = ctypes.c_double
 lib.bottom_est.argtypes = (ctypes.c_int, ctypes.POINTER(ctypes.c_double), ctypes.c_void_p)
 
 
-cpdef run(step_limit, double learning_rate, real_means, est_means, s_intervals, epsilon):
+cpdef run(exp_type, double learning_rate, real_means, est_means, s_intervals, epsilon):
     est_x1 = est_means[0]
     est_x2 = est_means[1]
     error = 1e15
     step = 0
+    step_limit = 10000
 
-    if step_limit is not None:
+
+    if exp_type == 'random_points_error_vs_step':
         step_list = []
         error_list = []
 
@@ -38,12 +40,6 @@ cpdef run(step_limit, double learning_rate, real_means, est_means, s_intervals, 
             step += 1
             prev_error = error
             error = euclidean_distance(real_means, est_x1, est_x2)
-
-            # if step == 1:
-            #     print('Learning rate: ' + str(learning_rate))
-            #     print('Starting estimated means: ' + str(est_means))
-            #     print('True means: ' + str(real_means))
-            #     print('Intervals: ' + str(s_intervals))
 
             step_list.append(step)
             error_list.append(error)
@@ -67,7 +63,78 @@ cpdef run(step_limit, double learning_rate, real_means, est_means, s_intervals, 
 
         return step_list, error_list
 
-    else:
+
+    elif exp_type == 'trajectory':
+        all_est_means = []
+        while True:
+            step += 1
+            all_est_means.append((est_x1, est_x2))
+            prev_error = error
+            error = euclidean_distance(real_means, est_x1, est_x2)
+
+            if step == 1:
+                print('Learning rate: ' + str(learning_rate))
+                print('Starting estimated means: ' + str(est_means))
+                print('True means: ' + str(real_means))
+                print('Intervals: ' + str(s_intervals))
+                print('Epsilon: ' + str(epsilon))
+
+            if prev_error > epsilon and error < epsilon:
+                epsilon_step = step
+                print("Final step for reaching error: " + str(epsilon_step) + "\n")
+                break
+
+            temp_est_x1 = est_x1
+            temp_est_x2 = est_x2
+
+            c = ctypes.c_double * 4
+            c = c(temp_est_x1, temp_est_x2, real_means[0], real_means[1])
+            user_data = ctypes.cast(ctypes.pointer(c), ctypes.c_void_p)
+
+            integrand_top_x1_real = LowLevelCallable(lib.top_x1_real, user_data)
+            integrand_top_x2_real = LowLevelCallable(lib.top_x2_real, user_data)
+            integrand_bottom_real = LowLevelCallable(lib.bottom_real, user_data)
+            integrand_top_x1_est = LowLevelCallable(lib.top_x1_est, user_data)
+            integrand_top_x2_est = LowLevelCallable(lib.top_x2_est, user_data)
+            integrand_bottom_est = LowLevelCallable(lib.bottom_est, user_data)
+
+            est_x1 = temp_est_x1 + learning_rate * (expectation(s_intervals, integrand_top_x1_real, integrand_bottom_real) - expectation(s_intervals, integrand_top_x1_est, integrand_bottom_est))
+            est_x2 = temp_est_x2 + learning_rate * (expectation(s_intervals, integrand_top_x2_real, integrand_bottom_real) - expectation(s_intervals, integrand_top_x2_est, integrand_bottom_est))
+        
+        return all_est_means
+
+
+    elif exp_type == 'random_points_epsilon_and_step':
+        while True:
+            step += 1
+            prev_error = error
+            error = euclidean_distance(real_means, est_x1, est_x2)
+
+            if prev_error > epsilon and error < epsilon:
+                epsilon_step = step
+                break
+
+            temp_est_x1 = est_x1
+            temp_est_x2 = est_x2
+
+            c = ctypes.c_double * 4
+            c = c(temp_est_x1, temp_est_x2, real_means[0], real_means[1])
+            user_data = ctypes.cast(ctypes.pointer(c), ctypes.c_void_p)
+
+            integrand_top_x1_real = LowLevelCallable(lib.top_x1_real, user_data)
+            integrand_top_x2_real = LowLevelCallable(lib.top_x2_real, user_data)
+            integrand_bottom_real = LowLevelCallable(lib.bottom_real, user_data)
+            integrand_top_x1_est = LowLevelCallable(lib.top_x1_est, user_data)
+            integrand_top_x2_est = LowLevelCallable(lib.top_x2_est, user_data)
+            integrand_bottom_est = LowLevelCallable(lib.bottom_est, user_data)
+
+            est_x1 = temp_est_x1 + learning_rate * (expectation(s_intervals, integrand_top_x1_real, integrand_bottom_real) - expectation(s_intervals, integrand_top_x1_est, integrand_bottom_est))
+            est_x2 = temp_est_x2 + learning_rate * (expectation(s_intervals, integrand_top_x2_real, integrand_bottom_real) - expectation(s_intervals, integrand_top_x2_est, integrand_bottom_est))
+        
+        return epsilon_step
+
+
+    elif exp_type == 'single_point_vary_s':
         while True:
             step += 1
             prev_error = error
@@ -78,6 +145,7 @@ cpdef run(step_limit, double learning_rate, real_means, est_means, s_intervals, 
                 print('Starting estimated means: ' + str(est_means))
                 print('True means: ' + str(real_means))
                 print('Intervals: ' + str(s_intervals))
+                print('Epsilon:' + str(epsilon))
 
             if prev_error > epsilon and error < epsilon:
                 epsilon_step = step
