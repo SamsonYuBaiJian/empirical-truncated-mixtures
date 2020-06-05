@@ -51,8 +51,8 @@ def main(exp_type, data_file_path, graph_type):
         if graph_type == 'title':
             plt.title('Epsilon Step vs. Denominator')
         elif graph_type == 'axes':
-            plt.xlabel('Measure of the Truncated Set Under "Appropriate Mixture Distribution"')
-            plt.ylabel('Avg No. of Iterations for Error Threshold of 0.1')
+            plt.xlabel('Measure of Truncated Set', fontsize=14)
+            plt.ylabel('No of Steps for Convergence', fontsize=14)
         plt.plot(data_dict['denominators'], data_dict['epsilon_steps'])
         plt.show()
 
@@ -63,18 +63,14 @@ def main(exp_type, data_file_path, graph_type):
         if graph_type == 'title':
             plt.title('2D Error vs. Step')
         elif graph_type == 'axes':
-            pass
+            plt.xlabel('No of Steps', fontsize=14)
+            plt.ylabel('Error with respect to True Mean', fontsize=14)
         plt.plot(data_dict['steps'], data_dict['errors'])
         plt.show()
 
     elif exp_type == 'trajectory':
         data_dict = open(str(data_file_path), 'r').readlines()
         data_dict = ast.literal_eval(data_dict[0])
-
-        if graph_type == 'title':
-            plt.title('Trajectory')
-        elif graph_type == 'axes':
-            pass
 
         true_means = data_dict['true_means']
         est_means = data_dict['est_means']
@@ -83,6 +79,11 @@ def main(exp_type, data_file_path, graph_type):
         # plot setup
         fig = plt.figure()
         plt.rcParams.update({'mathtext.default':  'regular' })
+        if graph_type == 'title':
+            plt.title('Trajectory')
+        elif graph_type == 'axes':
+            plt.xlabel('x', fontsize=14)
+            plt.ylabel('y', fontsize=14)
 
         # plot
         plt.annotate("γ", (lambda_means[0] + .1, lambda_means[1] - .25))
