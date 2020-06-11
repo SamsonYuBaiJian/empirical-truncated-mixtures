@@ -10,7 +10,7 @@ def main(exp_type):
 
     # for 2D Error vs Step experiment with random points from uniform distribution
     if exp_type == 'random_points_error_vs_step':
-        path = './experiments/' + exp_type
+        path = './graphs/' + exp_type
         if not os.path.exists(path):
             os.makedirs(path)
 
@@ -67,7 +67,7 @@ def main(exp_type):
 
     # for histogram and scatter with random points from uniform distribution
     elif exp_type == 'random_points_epsilon_and_step':
-        path = './experiments/' + exp_type
+        path = './graphs/' + exp_type
         if not os.path.exists(path):
             os.makedirs(path)
         all_epsilon_steps = []
@@ -120,7 +120,7 @@ def main(exp_type):
 
     # for experiments with single point, varying S intervals
     elif exp_type == 'single_point_vary_s':
-        path = './experiments/' + exp_type
+        path = './graphs/' + exp_type
         if not os.path.exists(path):
             os.makedirs(path)
         all_epsilon_steps = []
@@ -176,7 +176,7 @@ def main(exp_type):
 
     # for trajectory experiments
     elif exp_type == 'trajectory':
-        path = './experiments/' + exp_type
+        path = './graphs/' + exp_type
         if not os.path.exists(path):
             os.makedirs(path)
 
@@ -221,7 +221,7 @@ if __name__ == '__main__':
     parser.add_argument('--exp_type')
     args = parser.parse_args()
 
-    if not os.path.exists('./experiments'):
-        os.makedirs('./experiments')
+    if not os.path.exists('./graphs'):
+        os.makedirs('./graphs')
 
     main(args.exp_type)
