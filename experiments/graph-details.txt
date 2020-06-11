@@ -1,0 +1,51 @@
+------------------
+random_points_error_vs_step/experiment-1:
+------------------
+Plot of 2d distance vs 10000 iterations
+Start means: 100 random points from uniform distribution of [-7, 7]
+true means: (2.534, 6.395)
+Intervals: [(1, 2), (-3, 1.5)]
+Learning rate: 0.01
+
+------------------
+random_points_error_vs_step/experiment-2:
+------------------
+Plot of 2d distance vs 10000 iterations
+Start means: 100 random points from uniform distribution of [-7, 7]
+true means: (2, 1)
+Intervals: [(-2, 2), (-2, 2)]
+Learning rate: 0.01
+
+-----------------------
+single_point_vary_s/experiment-1:
+-----------------------
+true means: (2.534, 6.395)
+start means: (2.4,6.2)
+intervals: [(1, 2), (-3, 1.5)] --> [(1, 22),(-3,21.5)]
+Learning rate: 0.01
+Epsilon distance: 0.1
+Interval change: 0.5
+
+-----------------------
+single_point_vary_s/experiment-2:
+-----------------------
+true means: (2.534, 6.395)
+start means: (0.9,0.1)
+intervals: [(1, 2), (-3, 1.5)] --> [(1, 22),(-3,21.5)]
+Learning rate: 0.01
+Epsilon distance: 0.1
+Interval change: 0.5
+
+-----------------------
+trajectory/experiment-1:
+-----------------------
+true means: (2.534, 6.395)
+intervals: [(1, 2), (-3, 1.5)]
+Learning rate: 0.01
+Epsilon distance: 0.05
+Start means:
+- (0.95, 0.05)
+- (-0.05, 0.05)
+- (2, 6)
+- (4, 1.5)
+- (-1.5, 8)
