@@ -13,18 +13,17 @@ def main():
 
     # parameters
     epsilon = 0.1
-    step_limit = 10000
-    # num_of_points = 100
-    num_of_points = 10
+    step_limit = 15000
+    num_of_points = 2
     seed = 42
     np.random.seed(seed)
-    true_means = (5, 2, 1)
+    true_means = (3, 2, 1)
     # s_intervals = [(-2, 2), (-2, 2)]
-    print_every = 10
+    print_every = 1
 
-    x_points = np.random.uniform(-7,7,num_of_points)
-    y_points = np.random.uniform(-7,7,num_of_points)
-    z_points = np.random.uniform(-7,7,num_of_points)
+    x_points = np.random.uniform(0,5,num_of_points)
+    y_points = np.random.uniform(0,5,num_of_points)
+    z_points = np.random.uniform(0,5,num_of_points)
     all_est_means = []
     final_error_list = [0] * step_limit
 
@@ -32,7 +31,7 @@ def main():
     for i in range(num_of_points):
         est_means = (x_points[i],y_points[i],z_points[i])
 
-        step_list, error_list = trivariate.run(learning_rate, true_means, est_means, epsilon)
+        step_list, error_list = trivariate.run(learning_rate, true_means, est_means, epsilon, step_limit)
         
         all_est_means.append(est_means)
         for j in range(step_limit):

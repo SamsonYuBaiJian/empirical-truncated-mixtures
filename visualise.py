@@ -56,6 +56,19 @@ def main(exp_type, data_file_path, graph_type):
         plt.plot(data_dict['denominators'], data_dict['epsilon_steps'])
         plt.show()
 
+    elif exp_type == '3d_random_points_error_vs_step':
+        data_dict = open(str(data_file_path), 'r').readlines()
+        data_dict = ast.literal_eval(data_dict[0])
+
+        if graph_type == 'title':
+            plt.title('3D Error vs. Step')
+        elif graph_type == 'axes':
+            plt.xlabel('No of Steps', fontsize=14)
+            plt.ylabel('Error with respect to True Mean', fontsize=14)
+        plt.ylim(0, 3)
+        plt.plot(data_dict['steps'], data_dict['errors'])
+        plt.show()
+
     elif exp_type == 'random_points_error_vs_step':
         data_dict = open(str(data_file_path), 'r').readlines()
         data_dict = ast.literal_eval(data_dict[0])
