@@ -80,7 +80,7 @@ def get_value(top, bottom, data, intervals=None):
     # test = integrate.tplquad(para, -math.sqrt(2), math.sqrt(2), lambda x: -math.sqrt(2-x**2), lambda x: math.sqrt(2-x**2), lambda x,y: x**2+y**2, lambda x,y: math.sqrt(6-x**2 - y**2))
     # print(test, "para")
 
-    bottom = integrate.tplquad(integrand_bottom, -math.sqrt(2), math.sqrt(2), lambda x: -math.sqrt(2-x**2), lambda x: math.sqrt(2-x**2), lambda x,y: x**2+y**2, lambda x,y: math.sqrt(6-x**2 - y**2))[0]
+    bottom = integrate.tplquad(integrand_bottom, 0, 3, lambda x: 0, lambda x: 2-(2*x/3), lambda x,y: 0, lambda x,y: 5-(5*x/3)-(5*y/2))[0]
 
     # get the rest
     c = ctypes.c_double * 7
@@ -100,7 +100,7 @@ def get_value(top, bottom, data, intervals=None):
     elif top == 'z_est':
         integrand_top = LowLevelCallable(lib.top_z_est, user_data)
         
-    top = integrate.tplquad(integrand_top, -math.sqrt(2), math.sqrt(2), lambda x: -math.sqrt(2-x**2), lambda x: math.sqrt(2-x**2), lambda x,y: x**2+y**2, lambda x,y: math.sqrt(6-x**2 - y**2))[0]
+    top = integrate.tplquad(integrand_top, 0, 3, lambda x: 0, lambda x: 2-(2*x/3), lambda x,y: 0, lambda x,y: 5-(5*x/3)-(5*y/2))[0]
 
     return top
 

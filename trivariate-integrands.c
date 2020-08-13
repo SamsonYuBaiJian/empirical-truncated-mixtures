@@ -49,10 +49,6 @@ double bottom(int n, double *x, void *user_data){
 		exp(-0.5 * ((x[0] + c[0])*(x[0] + c[0]) + (x[1] + c[1])*(x[1] + c[1]) + (x[2] + c[2])*(x[2] + c[2]))));
 }
 
-double tetra(int n, double *x, void *user_data){
-	return 1.;
-}
-
-double para(int n, double *x, void *user_data){
+double sanity_check(int n, double *x, void *user_data){
 	return 1.;
 }

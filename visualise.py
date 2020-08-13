@@ -65,7 +65,6 @@ def main(exp_type, data_file_path, graph_type):
         elif graph_type == 'axes':
             plt.xlabel('No of Steps', fontsize=14)
             plt.ylabel('Error with respect to True Mean', fontsize=14)
-        plt.ylim(0, 3)
         plt.plot(data_dict['steps'], data_dict['errors'])
         plt.show()
 

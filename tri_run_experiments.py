@@ -14,7 +14,7 @@ def main():
     # parameters
     epsilon = 0.1
     step_limit = 15000
-    num_of_points = 2
+    num_of_points = 5
     seed = 42
     np.random.seed(seed)
     true_means = (3, 2, 1)
