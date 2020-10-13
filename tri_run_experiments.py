@@ -31,7 +31,7 @@ def main():
 
     print("Doing " + str(num_of_points) + " random points for 3D Error vs Step experiment...")
     for i in range(num_of_points):
-        # start_time = time.time()
+        start_time = time.time()
         est_means = (x_points[i],y_points[i],z_points[i])
 
         step_list, error_list = trivariate.run(learning_rate, true_means, est_means, epsilon, step_limit)
@@ -40,9 +40,9 @@ def main():
         for j in range(step_limit):
             average_error_list[j] += error_list[j]
         full_error_list.append(error_list)
-        # current_time = time.time()
-        # time_elapsed = current_time - start_time
-        # print(time_elapsed)
+        current_time = time.time()
+        time_elapsed = current_time - start_time
+        print(time_elapsed)
         if (i + 1) % print_every == 0:
             print(str(i + 1) + "/" + str(num_of_points) + " random point(s) done.")
     for i in range(step_limit):

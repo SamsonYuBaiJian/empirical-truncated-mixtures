@@ -68,19 +68,9 @@ def get_value(top, bottom, data, intervals=None):
     user_data = ctypes.cast(ctypes.pointer(c), ctypes.c_void_p)
     integrand_bottom = LowLevelCallable(lib.bottom, user_data)
 
-    # lib.tetra.restype = ctypes.c_double
-    # lib.tetra.argtypes = (ctypes.c_int, ctypes.POINTER(ctypes.c_double), ctypes.c_void_p)
-    # tetra = LowLevelCallable(lib.tetra, user_data)
-    # test = integrate.tplquad(tetra, 0, 1, lambda x: 0, lambda x: 2-2*x, lambda x,y: 0, lambda x,y: 3-3*x-1.5*y)
-    # print(test, "tetra")
-
-    # lib.para.restype = ctypes.c_double
-    # lib.para.argtypes = (ctypes.c_int, ctypes.POINTER(ctypes.c_double), ctypes.c_void_p)
-    # para = LowLevelCallable(lib.para, user_data)
-    # test = integrate.tplquad(para, -math.sqrt(2), math.sqrt(2), lambda x: -math.sqrt(2-x**2), lambda x: math.sqrt(2-x**2), lambda x,y: x**2+y**2, lambda x,y: math.sqrt(6-x**2 - y**2))
-    # print(test, "para")
-
-    bottom = integrate.tplquad(integrand_bottom, 0, 3, lambda x: 0, lambda x: 2-(2*x/3), lambda x,y: 0, lambda x,y: 5-(5*x/3)-(5*y/2))[0]
+    # bottom = integrate.tplquad(integrand_bottom, 0, 1, lambda x: 0, lambda x: 2-2*x, lambda x,y: 0, lambda x,y: 3-3*x-1.5*y)[0]
+    bottom = integrate.tplquad(integrand_bottom, -math.sqrt(2), math.sqrt(2), lambda x: -math.sqrt(2-x**2), lambda x: math.sqrt(2-x**2), lambda x,y: x**2+y**2, lambda x,y: math.sqrt(6-x**2 - y**2))[0]
+    # bottom = integrate.tplquad(integrand_bottom, 0, 3, lambda x: 0, lambda x: 2-(2*x/3), lambda x,y: 0, lambda x,y: 5-(5*x/3)-(5*y/2))[0]
 
     # get the rest
     c = ctypes.c_double * 7
