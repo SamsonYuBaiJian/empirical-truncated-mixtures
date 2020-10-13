@@ -4,6 +4,7 @@ from math import sqrt
 import seaborn as sns
 import argparse
 import matplotlib.patches as patches
+import numpy as np
 
 
 def euclidean_distance(real, est):
@@ -66,6 +67,20 @@ def main(exp_type, data_file_path, graph_type):
             plt.xlabel('No of Steps', fontsize=14)
             plt.ylabel('Error with respect to True Mean', fontsize=14)
         plt.plot(data_dict['steps'], data_dict['average_error_list'])
+
+        under_line = []
+        over_line = []
+        k = 1
+        for i in range(int(data_dict['step_limit'])):
+            temp = []
+            for j in range(int(data_dict['num_of_points'])):
+                temp.append(data_dict['full_error_list'][j][i])
+            std = np.std(temp)
+            # print(std)
+            under_line.append(data_dict['average_error_list'][i] - k * std)
+            over_line.append(data_dict['average_error_list'][i] + k * std)
+
+        plt.fill_between(data_dict['steps'], under_line, over_line, color='b', alpha=.1)
         plt.show()
 
     elif exp_type == 'random_points_error_vs_step':
