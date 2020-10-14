@@ -92,7 +92,22 @@ def main(exp_type, data_file_path, graph_type):
         elif graph_type == 'axes':
             plt.xlabel('No of Steps', fontsize=14)
             plt.ylabel('Error with respect to True Mean', fontsize=14)
-        plt.plot(data_dict['steps'], data_dict['errors'])
+        plt.plot(data_dict['steps'], data_dict['average_error_list'])
+
+        under_line = []
+        over_line = []
+        k = 1
+        for i in range(int(data_dict['step_limit'])):
+            temp = []
+            for j in range(int(data_dict['num_of_points'])):
+                temp.append(data_dict['full_error_list'][j][i])
+            std = np.std(temp)
+            # print(std)
+            under_line.append(data_dict['average_error_list'][i] - k * std)
+            over_line.append(data_dict['average_error_list'][i] + k * std)
+
+        plt.fill_between(data_dict['steps'], under_line, over_line, color='b', alpha=.1)
+
         plt.show()
 
     elif exp_type == 'trajectory':
@@ -148,9 +163,9 @@ def main(exp_type, data_file_path, graph_type):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--exp_type')
-    parser.add_argument('--data_file_path')
-    parser.add_argument('--graph_type')
+    parser.add_argument('--exp_type', required=True)
+    parser.add_argument('--data_file_path', required=True)
+    parser.add_argument('--graph_type', required=True)
     args = parser.parse_args()
 
     main(args.exp_type, args.data_file_path, args.graph_type)

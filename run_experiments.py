@@ -2,6 +2,7 @@ import bivariate
 import numpy as np
 import os
 import argparse
+import time
 
 def main(exp_type):
     all_est_means = []
@@ -71,8 +72,8 @@ def main(exp_type):
 
         # parameters
         epsilon = 0.1
-        step_limit = 10000
-        num_of_points = 100
+        step_limit = 12000
+        num_of_points = 50
         seed = 42
         np.random.seed(seed)
         # true_means = (2.534, 6.395)
@@ -84,19 +85,25 @@ def main(exp_type):
         points_1 = np.random.uniform(-7,7,num_of_points)
         points_2 = np.random.uniform(-7,7,num_of_points)
         all_est_means = []
-        final_error_list = [0] * step_limit
+        full_error_list = []
+        average_error_list = [0] * step_limit
 
         print("Doing " + str(num_of_points) + " random points for 2D Error vs Step experiment...")
         for i in range(num_of_points):
+            start_time = time.time()
             est_means = (points_1[i],points_2[i])
             step_list, error_list = bivariate.run(exp_type, learning_rate, true_means, est_means, s_intervals, epsilon)
             all_est_means.append(est_means)
             for j in range(step_limit):
-                final_error_list[j] += error_list[j]
+                average_error_list[j] += error_list[j]
+            full_error_list.append(error_list)
+            current_time = time.time()
+            time_elapsed = current_time - start_time
+            print(time_elapsed)
             if (i + 1) % print_every == 0:
                 print(str(i + 1) + "/" + str(num_of_points) + " random point(s) done.")
         for i in range(step_limit):
-            final_error_list[i] /= num_of_points
+            average_error_list[i] /= num_of_points
 
         # save metrics
         experiment_nos = [int(f.split('-')[-1]) for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]
@@ -107,7 +114,8 @@ def main(exp_type):
         f = open(path + '/experiment-' + str(target_no), 'w')
         save_dict = {}
         save_dict['steps'] = step_list
-        save_dict['errors'] = final_error_list
+        save_dict['average_error_list'] = average_error_list
+        save_dict['full_error_list'] = full_error_list
         save_dict['learning_rate'] = str(learning_rate)
         save_dict['true_means'] = str(true_means)
         save_dict['est_means'] = all_est_means
