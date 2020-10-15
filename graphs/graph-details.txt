@@ -2,19 +2,23 @@
 random_points_error_vs_step/experiment-1:
 ------------------
 Plot of 2d distance vs 10000 iterations
-Start means: 100 random points from uniform distribution of [-7, 7]
-true means: (2.534, 6.395)
-Intervals: [(1, 2), (-3, 1.5)]
-Learning rate: 0.01
+- step_limit: 12000
+- num_of_points: 50
+- learning_rate: 0.01
+- true_means: (2.534, 6.395)
+- est_means: np.random.uniform(-7,7,num_of_points)
+- s_intervals: [(1,2), (-3,1.5)]
 
 ------------------
 random_points_error_vs_step/experiment-2:
 ------------------
 Plot of 2d distance vs 10000 iterations
-Start means: 100 random points from uniform distribution of [-7, 7]
-true means: (2, 1)
-Intervals: [(-2, 2), (-2, 2)]
-Learning rate: 0.01
+- step_limit: 12000
+- num_of_points: 50
+- learning_rate: 0.01
+- true_means: (2, 1)
+- est_means: np.random.uniform(-7,7,num_of_points)
+- s_intervals: [(-2,2), (-2,2)]
 
 -----------------------
 single_point_vary_s/experiment-1:
@@ -51,16 +55,21 @@ Start means:
 - (-1.5, 8)
 
 -----------------------
-3d_random_points_error_vs_step/experiment-1:
------------------------
-integrate.tplquad(integrand, 0, 1, lambda x: 0, lambda x: 2-2*x, lambda x,y: 0, lambda x,y: 3-3*x-1.5*y)
-
------------------------
 3d_random_points_error_vs_step/experiment-2:
 -----------------------
-integrate.tplquad(integrand, -math.sqrt(2), math.sqrt(2), lambda x: -math.sqrt(2-x**2), lambda x: math.sqrt(2-x**2), lambda x,y: x**2+y**2, lambda x,y: math.sqrt(6-x**2 - y**2))
+- step_limit: 15000
+- num_of_points: 50
+- learning_rate: 0.01
+- true_means: (3, 2, 1)
+- est_means: np.random.uniform(0,5,num_of_points)
+- integrate.tplquad(integrand, -math.sqrt(2), math.sqrt(2), lambda x: -math.sqrt(2-x**2), lambda x: math.sqrt(2-x**2), lambda x,y: x**2+y**2, lambda x,y: math.sqrt(6-x**2 - y**2))
 
 -----------------------
 3d_random_points_error_vs_step/experiment-3:
 -----------------------
-integrate.tplquad(integrand, 0, 3, lambda x: 0, lambda x: 2-(2*x/3), lambda x,y: 0, lambda x,y: 5-(5*x/3)-(5*y/2))
+- step_limit: 15000
+- num_of_points: 50
+- learning_rate: 0.01
+- true_means: (3, 2, 1)
+- est_means: np.random.uniform(0,5,num_of_points)
+- integrate.tplquad(integrand, 0, 3, lambda x: 0, lambda x: 2-(2*x/3), lambda x,y: 0, lambda x,y: 5-(5*x/3)-(5*y/2))
